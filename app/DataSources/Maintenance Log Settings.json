@@ -459,11 +459,11 @@
       },
       "OptionSetReferenceItem1": {
         "OptionSetReferenceColumnName": "ctc_reoccurrenceenglish",
-        "OptionSetReferenceEntityName": "Maintenance logs"
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
       },
       "OptionSetReferenceItem2": {
         "OptionSetReferenceColumnName": "ctc_reoccurrenceenglish",
-        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+        "OptionSetReferenceEntityName": "Maintenance logs"
       }
     },
     "OptionSetTypeKey": "PicklistType",
@@ -489,11 +489,11 @@
       },
       "OptionSetReferenceItem1": {
         "OptionSetReferenceColumnName": "ctc_reoccurrencefrench",
-        "OptionSetReferenceEntityName": "Maintenance logs"
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
       },
       "OptionSetReferenceItem2": {
         "OptionSetReferenceColumnName": "ctc_reoccurrencefrench",
-        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+        "OptionSetReferenceEntityName": "Maintenance logs"
       }
     },
     "OptionSetTypeKey": "PicklistType",
