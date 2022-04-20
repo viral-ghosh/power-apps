@@ -1,0 +1,45 @@
+Screen1 As screen:
+
+    Gallery4 As gallery.galleryVertical:
+        Items: =colCategoryEnglish
+        Layout: =Layout.Vertical
+        TemplateSize: =47
+        X: =40
+        Y: =40
+        ZIndex: =1
+
+        Label5 As label:
+            Height: =55
+            Text: =ThisItem.Value
+            Width: =301
+            ZIndex: =1
+
+    Button3 As button:
+        OnSelect: |
+            =ClearCollect(
+                colMaintenanceLogSettingsID,
+                AddColumns(
+                    'Maintenance Log Settings',
+                    "MaintenanceLogSettingsID",
+                    MasterLogsID.MasterMaintenanceLogs
+                ).MaintenanceLogSettingsID
+            );
+            ClearCollect(
+                colCategoryEnglish,
+                RenameColumns(
+                    Distinct(
+                        Filter(
+                            MasterMaintenanceLogs,
+                            MasterMaintenanceLogs in colMaintenanceLogSettingsID.MaintenanceLogSettingsID
+                        ),
+                        CategoryEnglish
+                    ),
+                    "Result",
+                    "Value"
+                )
+            );
+        Text: ="Button"
+        X: =828
+        Y: =144
+        ZIndex: =2
+

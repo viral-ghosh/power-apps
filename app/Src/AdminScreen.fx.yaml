@@ -1,0 +1,262 @@
+AdminScreen As screen:
+
+    cmbAdmin_Localization As combobox:
+        AccessibleLabel: ="choice of languages"
+        BorderColor: =Black
+        BorderThickness: =1
+        ChevronBackground: =Yellow
+        ChevronDisabledBackground: =Yellow
+        ChevronDisabledFill: =Blue
+        ChevronFill: =Blue
+        ChevronHoverBackground: =Yellow
+        ChevronHoverFill: =Blue
+        Color: =Black
+        DisabledBorderColor: =Black
+        DisabledColor: =Black
+        DisabledFill: =White
+        DisplayFields: =["Value"]
+        Fill: =White
+        FocusedBorderColor: =Black
+        FocusedBorderThickness: =1
+        Font: =Font.'Segoe UI'
+        Height: =60
+        InputTextPlaceholder: ="Select language"
+        Items: =["en-US","fr-FR",]
+        SearchFields: =["Value"]
+        SearchItems: =Search(["en-US","fr-FR",],cmbAdmin_Localization.SearchText,"Value")
+        SelectionColor: =Black
+        SelectionFill: =White
+        SelectionTagColor: =Black
+        SelectionTagFill: =White
+        SelectMultiple: =false
+        Size: =24
+        Tooltip: =
+        Visible: =false
+        Y: =708
+        ZIndex: =1
+
+    btnAdmin_Localization As button:
+        BorderColor: =Black
+        BorderThickness: =1
+        Color: =White
+        DisabledBorderColor: =White
+        DisabledColor: =White
+        DisabledFill: =Blue
+        Fill: =Blue
+        FocusedBorderColor: =Black
+        FocusedBorderThickness: =1
+        Font: =Font.'Segoe UI'
+        Height: =cmbAdmin_Localization.Height
+        HoverBorderColor: =Blue
+        HoverColor: =White
+        HoverFill: =Blue
+        OnSelect: |-
+            =Set(
+                gblUserLanguage,
+            cmbAdmin_Localization.Selected.Value
+            );
+            //build localization collection, with user's language
+            ClearCollect(
+                colLocalization,
+                Filter(
+                    localizationDesktopApp,
+                    LanguageTag = gblUserLanguage
+                )
+            );
+            ClearCollect(
+                    colNav,
+                    //Table(
+                        {
+                            Title: With({varDefault:"Edit Logs and Reports",varOOBTextId:"componentTextEditLogsReports"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))),
+                            Screen: EditLogsReportsScreen,
+                            Media: ImageReports2
+                        },
+                        {
+                            Title: With({varDefault:"Schedule Manager",varOOBTextId:"componentTextScheduleManager"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))),
+                            Screen: ScheduleManagerScreen,
+                            Media: ImageSchedule2
+                        },
+                        {
+                            Title: With({varDefault:"Real Estate Maintenance Manual",varOOBTextId:"componentTextStoreMaintenanceManual"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))),
+                            Screen: StoreMaintenanceManualScreen,
+                            Media: ImageManual2
+                        },
+                        {
+                            Title: With({varDefault:"Protocols",varOOBTextId:"componentTextProtocols"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))),
+                            Screen: ProtocolsScreen,
+                            Media: ImageProtocol2
+                        }
+                                    );
+            
+            
+            
+            
+            
+            
+            
+            Navigate(EditLogsReportsScreen, Transition.None,{LvarViewIndividualLog: false, LvarResetFollowUp: false})
+        PressedBorderColor: =Black
+        PressedColor: =Blue
+        PressedFill: =Blue
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Size: =24
+        Text: ="Submit"
+        Tooltip: =Self.Text
+        Visible: =false
+        X: =348
+        Y: =708
+        ZIndex: =2
+
+    Label6 As label:
+        Text: =First(colSelectedMaintenanceLog).MaintenanceLogs
+        Visible: =false
+        Width: =416
+        X: =16
+        Y: =496
+        ZIndex: =4
+
+    btnExportExcel_2 As button:
+        BorderThickness: =0
+        Fill: =varCTCDarkGrey
+        FocusedBorderThickness: =0
+        HoverFill: =varCTCDarkGrey
+        OnSelect: |-
+            =Set(
+                gblUserLanguage,
+            cmbAdmin_Localization2.Selected.Value
+            );
+            //build localization collection, with user's language
+            ClearCollect(
+                colLocalization,
+                Filter(
+                    localizationDesktopApp,
+                    LanguageTag = gblUserLanguage
+                )
+            );
+            ClearCollect(
+                    colNav,
+                    //Table(
+                                    {
+                            Title: With({varDefault:"Edit Logs and Reports",varOOBTextId:"componentTextEditLogsReports"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))),
+                            Screen: EditLogsReportsScreen,
+                            Media: ImageReports2,
+                            URL: Blank()
+                        },
+                        {
+                            Title: With({varDefault:"Schedule Manager",varOOBTextId:"componentTextScheduleManager"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))),
+                            Screen: ScheduleManagerScreen,
+                            Media: ImageSchedule2,
+                            URL: Blank()
+                        },
+                        {
+                            Title: With({varDefault:"Maintenance Manual",varOOBTextId:"componentTextStoreMaintenanceManual"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))),
+                            Screen: Blank(),
+                            Media: ImageManual2,
+                            URL: With({varDefault:"https://www.cantireu.com/RealEstate/Maintenance_Manual_EN.pdf",varOOBTextId:"componentManualURL"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                        },
+                        {
+                            Title: With({varDefault:"Protocols",varOOBTextId:"componentTextProtocols"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))),
+                            Screen: Blank(),
+                            Media: ImageProtocol2,
+                            URL: With({varDefault:"https://www.cantireu.com/RealEstate/Real_Estate_Maintenance_Protocols_EN.pdf",varOOBTextId:"componentProtocolURL"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                        }
+                                    );
+            
+            
+            
+            
+            
+            
+            
+            Navigate(EditLogsReportsScreen, Transition.None,{LvarViewIndividualLog: false, LvarResetFollowUp: false})
+        RadiusBottomLeft: =5
+        RadiusBottomRight: =5
+        RadiusTopLeft: =5
+        RadiusTopRight: =5
+        Size: =10
+        Text: ="Submit"
+        X: =730
+        Y: =323
+        ZIndex: =8
+
+    ReOccuringEnglish_17 As group:
+        Height: =5
+        Width: =5
+        X: =-127
+        Y: =-40
+        ZIndex: =8
+
+        StartDate_rback_24 As image:
+            Fill: =RGBA(179,179,179,0.18)
+            Height: =30
+            Image: =Blank()
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Width: =250
+            X: =414
+            Y: =328
+            ZIndex: =5
+
+        TextInput1_61 As text:
+            BorderThickness: =0
+            Color: =RGBA(255, 255, 255, 1)
+            Default: =""
+            DisplayMode: =DisplayMode.View
+            Fill: =varCTCLogoRed
+            FontWeight: =FontWeight.Semibold
+            Height: =30
+            OnSelect: =
+            PaddingLeft: =5
+            Size: =9
+            Width: =38
+            X: =626
+            Y: =328
+            ZIndex: =6
+
+        cmbAdmin_Localization2 As combobox:
+            BorderThickness: =0
+            ChevronBackground: =varCTCLogoRed
+            ChevronFill: =White
+            ChevronHoverBackground: =varCTCLogoRed
+            ChevronHoverFill: =varCTCLogoRed
+            DefaultSelectedItems: |-
+                =    
+                    
+            DisplayFields: =["Value"]
+            Fill: |-
+                =varCTCLightGrey
+                //If(!ReOccurringColor, Transparent, White)
+            FocusedBorderThickness: =0
+            Height: =26
+            HoverFill: |-
+                =
+                
+                ColorFade(varCTCLogoRed,60%)
+            IsSearchable: =false
+            Items: =["en-US","fr-FR",]
+            OnSelect: |-
+                =false
+                //UpdateContext({LvarSetCompletedOnDateToday: true})
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedFill: =Transparent
+            Reset: =
+            SearchFields: =["Value"]
+            SearchItems: =[]
+            SelectionFill: =varCTCLogoRed
+            SelectionTagFill: =varCTCLightGreen01
+            SelectMultiple: =false
+            Width: =246
+            X: =415
+            Y: =330
+            ZIndex: =7
+

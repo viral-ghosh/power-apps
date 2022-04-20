@@ -1,0 +1,476 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "ctc_mastermaintenancelogses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "ctc_mastermaintenancelogs",
+    "MaxGetRowsCount": 2000,
+    "Name": "MasterMaintenanceLogs",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "ctc_active": "Active",
+      "ctc_categoryenglish": "CategoryEnglish",
+      "ctc_categoryfrench": "CategoryFrench",
+      "ctc_completeonefd": "CompleteOnEFD",
+      "ctc_completeonefdfrench": "CompleteOnEFDFrench",
+      "ctc_corporatecompliance01": "CorporateCompliance01",
+      "ctc_corporatecompliance02": "CorporateCompliance02",
+      "ctc_corporatecompliance03": "CorporateCompliance03",
+      "ctc_corporatecompliance04": "CorporateCompliance04",
+      "ctc_corporatecompliance05": "CorporateCompliance05",
+      "ctc_corporatecompliance06": "CorporateCompliance06",
+      "ctc_corporatecompliance07": "CorporateCompliance07",
+      "ctc_corporatecompliance08": "CorporateCompliance08",
+      "ctc_corporatecompliance09": "CorporateCompliance09",
+      "ctc_corporatecompliance10": "CorporateCompliance10",
+      "ctc_dayoftheweekenglish": "DayOfTheWeekEnglish",
+      "ctc_dayoftheweekfrench": "DayOfTheWeekFrench",
+      "ctc_detail01english": "Detail01English",
+      "ctc_detail01french": "Detail01French",
+      "ctc_detail02english": "Detail02English",
+      "ctc_detail02french": "Detail02French",
+      "ctc_detail03english": "Detail03English",
+      "ctc_detail03french": "Detail03French",
+      "ctc_detail04english": "Detail04English",
+      "ctc_detail04french": "Detail04French",
+      "ctc_detail05english": "Detail05English",
+      "ctc_detail05french": "Detail05French",
+      "ctc_detail06english": "Detail06English",
+      "ctc_detail06french": "Detail06French",
+      "ctc_detail07english": "Detail07English",
+      "ctc_detail07french": "Detail07French",
+      "ctc_detail08english": "Detail08English",
+      "ctc_detail08french": "Detail08French",
+      "ctc_detail09english": "Detail09English",
+      "ctc_detail09french": "Detail09French",
+      "ctc_detail10english": "Detail10English",
+      "ctc_detail10french": "Detail10French",
+      "ctc_MaintenanceLogSettings_MasterLogsID_c": "Maintenance Log Settings",
+      "ctc_mastermaintenancelogs_AsyncOperations": "System Jobs",
+      "ctc_mastermaintenancelogs_BulkDeleteFailures": "Bulk Delete Failures",
+      "ctc_mastermaintenancelogs_DuplicateBaseRecord": "Duplicate Records (ctc_mastermaintenancelogs_DuplicateBaseRecord)",
+      "ctc_mastermaintenancelogs_DuplicateMatchingRecord": "Duplicate Records (ctc_mastermaintenancelogs_DuplicateMatchingRecord)",
+      "ctc_mastermaintenancelogs_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "ctc_mastermaintenancelogs_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "ctc_mastermaintenancelogs_ProcessSession": "Process Sessions",
+      "ctc_mastermaintenancelogs_SyncErrors": "Sync Errors",
+      "ctc_mastermaintenancelogsid": "MasterMaintenanceLogs",
+      "ctc_name": "Name",
+      "ctc_nameenglish": "Name English",
+      "ctc_namefrench": "Name French",
+      "ctc_othercategory": "Other Category",
+      "ctc_protocolenglish": "Protocol English",
+      "ctc_protocolfrench": "Protocol French",
+      "ctc_protocolurl": "Protocol URL",
+      "ctc_protocolurlfrench": "Protocol URL French",
+      "ctc_reoccurrenceenglish": "ReOccurrence English",
+      "ctc_reoccurrencefrench": "ReOccurrence French",
+      "ctc_startdate": "Start Date",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "MasterMaintenanceLogs",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "MasterMaintenanceLogs (Views)",
+    "Name": "_ctc_mastermaintenancelogs_views",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0129370d-d482-4c62-a551-022ae8294529": "Inactive MasterMaintenanceLogs",
+      "37c07b90-4797-403f-9e2d-bff2e6a1fc16": "Active MasterMaintenanceLogs",
+      "49a7a343-ce29-4f2c-abb2-f9818f349545": "MasterMaintenanceLogs Associated View",
+      "5541710d-b802-44f5-94ce-212006bcc58d": "MasterMaintenanceLogs Lookup View",
+      "5e251490-aad9-eb11-bacb-0022483c5315": "Maintenance Logs - Sent to Store",
+      "ce4596af-bf01-4ad4-a322-256a70957f2e": "MasterMaintenanceLogs Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "CategoryEnglish",
+    "Name": "ctc_categoryenglish",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Parking Lot Requirements",
+      "100000001": "Landscaping",
+      "100000002": "Sanitary Sewer and Storm Systems",
+      "100000003": "Garden Centre, Compounds and Exterior Storage",
+      "100000004": "Building Exterior",
+      "100000005": "Building Interior",
+      "100000006": "Mechanical",
+      "100000007": "Electrical",
+      "100000008": "Fire Prevention and Safety",
+      "100000009": "Fuel Storage and Waste Management",
+      "100000010": "Storage Tanks",
+      "100000011": "Other"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_categoryenglish",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "ctc_categoryenglish",
+        "OptionSetReferenceEntityName": "Maintenance logs"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_categoryenglish",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CategoryFrench",
+    "Name": "ctc_categoryfrench",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Exigences relatives à l’aire de stationnement",
+      "100000001": "Aménagement paysager",
+      "100000002": "Égouts sanitaires et systèmes d’évacuation des eaux de pluie",
+      "100000003": "Centre du jardinage, lieux d’entreposage des déchets et entreposage ex",
+      "100000004": "Extérieur du bâtiment",
+      "100000005": "Intérieur du bâtiment",
+      "100000006": "Mécanique",
+      "100000007": "Électricité",
+      "100000008": "Prévention des incendies et sécurité",
+      "100000009": "Entreposage de carburant et gestion des déchets",
+      "100000010": "Réservoirs de stockage",
+      "100000011": "Autre"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_categoryfrench",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "ctc_categoryfrench",
+        "OptionSetReferenceEntityName": "Maintenance logs"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_categoryfrench",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Active (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_active",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_active",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_active",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CompleteOnEFD (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_completeonefd",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_completeonefd",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_completeonefd",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CompleteOnEFDFrench (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_completeonefdfrench",
+    "OptionSetInfoNameMapping": {
+      "0": "Non",
+      "1": "Oui"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_completeonefdfrench",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_completeonefdfrench",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance01 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance01",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance01",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance01",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance02 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance02",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance02",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance02",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance03 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance03",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance03",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance03",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance04 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance04",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance04",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance04",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance05 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance05",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance05",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance05",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance06 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance06",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance06",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance06",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance07 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance07",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance07",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance07",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance08 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance08",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance08",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance08",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance09 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance09",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance09",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance09",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CorporateCompliance10 (MasterMaintenanceLogs)",
+    "Name": "ctc_ctc_mastermaintenancelogs_corporatecompliance10",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_corporatecompliance10",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_corporatecompliance10",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (MasterMaintenanceLogs)",
+    "Name": "ctc_mastermaintenancelogs_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (MasterMaintenanceLogs)",
+    "Name": "ctc_mastermaintenancelogs_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Send to store",
+      "100000000": "Draft",
+      "100000002": "Sent to store",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "MasterMaintenanceLogs",
+    "Type": "OptionSetInfo"
+  }
+]

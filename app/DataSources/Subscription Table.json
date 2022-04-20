@@ -1,0 +1,163 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "ctc_subscriptiontables",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "ctc_subscriptiontable",
+    "MaxGetRowsCount": 2000,
+    "Name": "Subscription Table",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "ctc_cadence": "Cadence",
+      "ctc_cadencefrench": "CadenceFrench",
+      "ctc_language": "Language",
+      "ctc_name": "Name",
+      "ctc_Store": "Store",
+      "ctc_subscriptiontable_AsyncOperations": "System Jobs",
+      "ctc_subscriptiontable_BulkDeleteFailures": "Bulk Delete Failures",
+      "ctc_subscriptiontable_DuplicateBaseRecord": "Duplicate Records (ctc_subscriptiontable_DuplicateBaseRecord)",
+      "ctc_subscriptiontable_DuplicateMatchingRecord": "Duplicate Records (ctc_subscriptiontable_DuplicateMatchingRecord)",
+      "ctc_subscriptiontable_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "ctc_subscriptiontable_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "ctc_subscriptiontable_ProcessSession": "Process Sessions",
+      "ctc_subscriptiontable_SyncErrors": "Sync Errors",
+      "ctc_subscriptiontableid": "Subscription Table",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Subscription Table",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Subscription Table (Views)",
+    "Name": "_ctc_subscriptiontable_views",
+    "RelatedEntityName": "Subscription Table",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "1363e7c3-3216-4786-80eb-f13768f6a8c3": "Subscription Table Associated View",
+      "6a573500-e257-4cf8-82c4-4b3e9b395fbd": "Inactive Subscription Table",
+      "8dd267cd-4177-494a-b4de-cfdbc09ae589": "Subscription Table Advanced Find View",
+      "9d086622-1d76-4d7b-9e54-912b099c1017": "Subscription Table Lookup View",
+      "b49785f1-33e7-4c9c-b826-0239456027ae": "Active Subscription Table"
+    }
+  },
+  {
+    "DisplayName": "Cadence",
+    "Name": "ctc_cadence",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Monthly",
+      "100000001": "Weekly",
+      "100000002": "None"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_cadence",
+        "OptionSetReferenceEntityName": "Subscription Table"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_cadence",
+    "RelatedEntityName": "Subscription Table",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CadenceFrench",
+    "Name": "ctc_cadencefrench",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Mensuelle",
+      "100000001": "Hebdomadaire",
+      "100000002": "Aucune"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_cadencefrench",
+        "OptionSetReferenceEntityName": "Subscription Table"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_cadencefrench",
+    "RelatedEntityName": "Subscription Table",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Language",
+    "Name": "ctc_language",
+    "OptionSetInfoNameMapping": {
+      "100000000": "en-US",
+      "100000001": "fr-FR"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_language",
+        "OptionSetReferenceEntityName": "Subscription Table"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_language",
+    "RelatedEntityName": "Subscription Table",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Subscription Table)",
+    "Name": "ctc_subscriptiontable_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Subscription Table"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Subscription Table",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Subscription Table)",
+    "Name": "ctc_subscriptiontable_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Subscription Table"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Subscription Table",
+    "Type": "OptionSetInfo"
+  }
+]

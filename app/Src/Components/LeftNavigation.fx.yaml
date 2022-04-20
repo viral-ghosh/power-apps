@@ -1,0 +1,179 @@
+LeftNavigation As CanvasComponent:
+    Fill: |-
+        =RGBA(51,51,51,1)
+        
+        //ColorFade(RGBA(237,38,38,1), 80%)
+    Height: =Max(App.Height, App.DesignHeight)-90
+    MenuWidth: =If(varOpenMenu,Max(App.Width, App.DesignWidth)/5,50)
+    NavItems: |-
+        =Table(
+                    {
+                        Title: "Home",
+                        Screen: App.ActiveScreen,
+                        Media: ImageHome2,
+                        URL: "www.google.com"
+                    },
+                    {
+                        Title: "Reports",
+                        Screen: App.ActiveScreen,
+                        Media: ImageReports2,
+                        URL: "www.google.com"
+                    },
+                    {
+                        Title: "Store Maintenance Manual",
+                        Screen: App.ActiveScreen,
+                        Media: ImageManual2,
+                        URL: "www.google.com"
+                    },
+                    {
+                        Title: "Protocols",
+                        Screen: App.ActiveScreen,
+                        Media: ImageProtocol2,
+                        URL: "www.google.com"
+                    }
+                                )
+    SaveState: =
+    SelectNavIcon: =galNavigation.Selected.icoNav
+    Width: =LeftNavigation.MenuWidth
+    X: =0
+    Y: =0
+    ZIndex: =2
+
+    IcoHamburger As icon.Add:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        Color: |-
+            =White
+            //RGBA(32, 54, 71, 1)
+        DisabledFill: =IcoHamburger.Fill
+        FocusedBorderColor: =IcoHamburger.BorderColor
+        Height: =50
+        HoverBorderColor: =ColorFade(IcoHamburger.BorderColor, 20%)
+        HoverColor: =ColorFade(IcoHamburger.Color, 20%)
+        HoverFill: =IcoHamburger.Fill
+        Icon: =Icon.Hamburger
+        OnSelect: |
+            =Set(varOpenMenu,!varOpenMenu)
+        PaddingBottom: =10
+        PaddingLeft: =10
+        PaddingRight: =10
+        PaddingTop: =10
+        PressedBorderColor: =ColorFade(IcoHamburger.BorderColor, -20%)
+        PressedColor: =ColorFade(IcoHamburger.Color, -20%)
+        PressedFill: =IcoHamburger.Fill
+        Width: =50
+        X: =0.00
+        ZIndex: =1
+
+    galNavigation As gallery.galleryVertical:
+        BorderColor: =RGBA(32, 54, 71, 1)
+        Default: =LookUp(LeftNavigation.NavItems,Screen=App.ActiveScreen)
+        DisabledBorderColor: =galNavigation.BorderColor
+        DisabledFill: =galNavigation.Fill
+        Height: =628
+        HoverBorderColor: =galNavigation.BorderColor
+        HoverFill: =galNavigation.Fill
+        Items: =LeftNavigation.NavItems
+        Layout: =Layout.Vertical
+        LoadingSpinnerColor: =galNavigation.BorderColor
+        OnSelect: =//Set(varLeftNavSelected, ThisItem)
+        PressedBorderColor: =galNavigation.BorderColor
+        PressedFill: =galNavigation.Fill
+        ShowScrollbar: =false
+        TemplateFill: |-
+            =Transparent
+            //If(ThisItem.IsSelected,RGBA(217,246,224,1))
+        TemplatePadding: =0
+        TemplateSize: =50
+        Width: =50
+        X: =0.00
+        Y: =50
+        ZIndex: =2
+
+        lblTitle As label:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            Color: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =lblTitle.BorderColor
+            Height: =50
+            HoverBorderColor: =lblTitle.BorderColor
+            HoverColor: =lblTitle.Color
+            HoverFill: =lblTitle.Fill
+            OnSelect: =Select(icoNav)
+            PaddingBottom: =0
+            PaddingLeft: =50
+            PaddingRight: =0.00
+            PaddingTop: =0.00
+            PressedBorderColor: =lblTitle.BorderColor
+            PressedColor: =lblTitle.Color
+            PressedFill: =lblTitle.Fill
+            Size: =12
+            Text: =ThisItem.Title
+            Width: =Parent.Width
+            X: =0.00
+            ZIndex: =1
+
+        rectSelected As rectangle:
+            BorderColor: =RGBA(32, 54, 71, 1)
+            DisabledFill: =rectSelected.Fill
+            Fill: =RGBA(237,32,48,1)
+            FocusedBorderColor: =rectSelected.BorderColor
+            Height: =25
+            HoverFill: =rectSelected.Fill
+            OnSelect: |-
+                =Select(icoNav)
+                
+                
+                //If(LeftNavigation.SaveState="Saved",Select(Parent))
+                
+                //If(LeftNavigation.SaveState="Saved",Select(icoNav))
+                //Select(icoNav)
+            PressedFill: =rectSelected.Fill
+            Visible: =false
+            Width: =3.56
+            Y: =5
+            ZIndex: =2
+
+        icoNav As image:
+            Fill: |-
+                =Transparent
+                
+                //If(ThisItem.IsSelected,RGBA(217,246,224,1),White)
+            FocusedBorderColor: =icoNav.BorderColor
+            Height: =Parent.TemplateHeight
+            HoverBorderColor: =ColorFade(icoNav.BorderColor, 20%)
+            HoverFill: =ColorFade(icoNav.Fill, 20%)
+            Image: =ThisItem.Media
+            OnSelect: |-
+                =Set(varOpenMenu, false );
+                
+                If(!IsBlank(ThisItem.URL),
+                Launch(ThisItem.URL), Navigate(ThisItem.Screen))
+                
+                
+                //Set(varOpenMenu, false );Navigate(ThisItem.Screen);If(!IsBlank(ThisItem.URL),Launch(ThisItem.URL))
+            PaddingBottom: =5
+            PaddingLeft: =5
+            PaddingRight: =5
+            PaddingTop: =5
+            PressedBorderColor: =ColorFade(icoNav.BorderColor, -20%)
+            PressedFill: =ColorFade(icoNav.Fill, -20%)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Tooltip: =ThisItem.Title
+            Width: =50
+            ZIndex: =3
+
+        Circle1 As circle:
+            Fill: =RGBA(237,38,38,1)
+            Height: =5
+            OnSelect: =Select(Parent)
+            Visible: |-
+                =If(ThisItem.Screen = App.ActiveScreen, true)
+                
+                //If(ThisItem.IsSelected, true)
+            Width: =5
+            X: =22
+            Y: =45
+            ZIndex: =4
+

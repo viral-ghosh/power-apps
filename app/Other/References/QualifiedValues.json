@@ -1,0 +1,73 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_ctc_maintenancelogsettings_forms",
+      "Namespace": "Maintenance Log Settings (Forms)",
+      "Values": {
+        "Information": "8b8b12a0-1234-4a7a-b428-4b49ceb3964f"
+      }
+    },
+    {
+      "Kind": "default.cds_ctc_mastermaintenancelogs_forms",
+      "Namespace": "MasterMaintenanceLogs (Forms)",
+      "Values": {
+        "Information": "02e3b45a-3e08-45ef-94fa-d24f74e2fc8b"
+      }
+    },
+    {
+      "Kind": "default.cds_ctc_store_forms",
+      "Namespace": "Stores (Forms)",
+      "Values": {
+        "Information": "85f22624-759e-4799-8279-938f3c02224c"
+      }
+    },
+    {
+      "Kind": "default.cds_team_forms",
+      "Namespace": "Teams (Forms)",
+      "Values": {
+        "Information": "f5cfab6a-d4c2-4519-b68f-6e7485432e29",
+        "Team": "7ba7fac1-1418-4335-935f-f7f8dfd73fcc",
+        "Team form – Business": "4aabf594-b30a-490d-bf97-89c67c6777fe"
+      }
+    },
+    {
+      "Kind": "default.cds_ctc_maintenancelogs_forms",
+      "Namespace": "Maintenance logs (Forms)",
+      "Values": {
+        "Information": "dc2c43cf-bdee-486e-92b6-c08135a61a57"
+      }
+    },
+    {
+      "Kind": "default.cds_systemuser_forms",
+      "Namespace": "Users (Forms)",
+      "Values": {
+        "Application User": "d26924ef-4d80-46f7-ab1d-e6ae80a54ce8",
+        "Information": "094fb08a-77bb-49e0-b7ea-8dbddfd01294",
+        "User": "c2cd9e55-d4b4-4b55-9951-16ead79643e5",
+        "User form – Business": "c2413504-7eb2-4c59-a087-95d819866114",
+        "User Hierarchy Tile Form": "c68d6c09-d7a7-4959-8d0f-44b8cff9b452"
+      }
+    },
+    {
+      "Kind": "default.cds_ctc_maintenancelogcomments_forms",
+      "Namespace": "MaintenanceLogComments (Forms)",
+      "Values": {
+        "Information": "d687b1a1-b7e4-4786-887a-d3df8d8a40c7"
+      }
+    },
+    {
+      "Kind": "default.cds_ctc_subscriptiontable_forms",
+      "Namespace": "Subscription Table (Forms)",
+      "Values": {
+        "Information": "db2d1715-ccd3-486d-8676-a16120ee1f11"
+      }
+    },
+    {
+      "Kind": "default.cds_ctc_maintenancelogphoto_forms",
+      "Namespace": "Maintenance log photos (Forms)",
+      "Values": {
+        "Information": "837ae0b5-fc34-44db-a2c7-f457dded6af9"
+      }
+    }
+  ]
+}

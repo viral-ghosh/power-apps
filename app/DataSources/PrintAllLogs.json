@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "eb1c4cbb-d5dd-48ae-9c29-8a1c3e9cc329",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "PrintAllLogs",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

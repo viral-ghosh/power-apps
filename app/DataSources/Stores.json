@@ -1,0 +1,109 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "ctc_stores",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "ctc_store",
+    "MaxGetRowsCount": 2000,
+    "Name": "Stores",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "ctc_addressline1": "Address Line 1",
+      "ctc_addressline2": "Address Line 2",
+      "ctc_city": "City",
+      "ctc_DealerID": "DealerID",
+      "ctc_MaintenanceLogs_StoreID_ctc_Store": "Maintenance logs",
+      "ctc_MaintenanceLogSettings_StoreID_ctc_St": "Maintenance Log Settings",
+      "ctc_name": "Name",
+      "ctc_postalcode": "Postal Code",
+      "ctc_province": "Province",
+      "ctc_store_AsyncOperations": "System Jobs",
+      "ctc_store_BulkDeleteFailures": "Bulk Delete Failures",
+      "ctc_store_DuplicateBaseRecord": "Duplicate Records (ctc_store_DuplicateBaseRecord)",
+      "ctc_store_DuplicateMatchingRecord": "Duplicate Records (ctc_store_DuplicateMatchingRecord)",
+      "ctc_store_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "ctc_store_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "ctc_store_ProcessSession": "Process Sessions",
+      "ctc_store_SyncErrors": "Sync Errors",
+      "ctc_storeid": "Store",
+      "ctc_storenumber": "StoreNumber",
+      "ctc_SubscriptionTable_Store_ctc_Store": "Subscription Table",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Stores",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Stores (Views)",
+    "Name": "_ctc_store_views",
+    "RelatedEntityName": "Stores",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "33c9864e-5df4-eb11-94ef-000d3af387b4": "PersonalStores",
+      "45a1d97c-3b39-4809-9a51-60a7c5475bfe": "Store Associated View",
+      "73b2b8fb-2cfa-47ba-9883-bed3e7216196": "Store Advanced Find View",
+      "9156855f-3b0d-4411-b9e6-8047e53009c2": "Inactive Stores",
+      "bc18b05b-c2a9-4b4d-8d3c-e4de9a9e2820": "Store Lookup View",
+      "e74dbb01-55dc-4192-82ef-c4d29432e302": "Active Stores",
+      "fa5185dd-4fee-eb11-94ef-000d3ae87c12": "test"
+    }
+  },
+  {
+    "DisplayName": "Status (Stores)",
+    "Name": "ctc_store_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Stores"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Stores",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Stores)",
+    "Name": "ctc_store_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Stores"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Stores",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,504 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "ctc_maintenancelogsettingses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "ctc_maintenancelogsettings",
+    "MaxGetRowsCount": 2000,
+    "Name": "Maintenance Log Settings",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "ctc_cadencesortfield": "CadenceSortField",
+      "ctc_completeonefd": "CompleteOnEFD",
+      "ctc_completeonefdfrench": "CompleteOnEFDFrench",
+      "ctc_customoverduealertcadencedesired": "CustomOverdueAlertCadenceDesired",
+      "ctc_customschedulecadencedesired": "CustomScheduleCadenceDesired",
+      "ctc_dayoftheweekenglish": "DayOfTheWeekEnglish",
+      "ctc_dayoftheweekfrench": "DayOfTheWeekFrench",
+      "ctc_initialmaintenancelogcreated": "Initial Maintenance Log Created",
+      "ctc_lognamesortfield": "LogNameSortField",
+      "ctc_lognamesortfieldfrench": "LogNameSortFieldFrench",
+      "ctc_logonoff": "LogOnOff",
+      "ctc_MaintenanceLogs_MaintenanceLogSetting": "Maintenance logs",
+      "ctc_maintenancelogsettings_AsyncOperations": "System Jobs",
+      "ctc_maintenancelogsettings_BulkDeleteFailures": "Bulk Delete Failures",
+      "ctc_maintenancelogsettings_DuplicateBaseRecord": "Duplicate Records (ctc_maintenancelogsettings_DuplicateBaseRecord)",
+      "ctc_maintenancelogsettings_DuplicateMatchingRecord": "Duplicate Records (ctc_maintenancelogsettings_DuplicateMatchingRecord)",
+      "ctc_maintenancelogsettings_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "ctc_maintenancelogsettings_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "ctc_maintenancelogsettings_ProcessSession": "Process Sessions",
+      "ctc_maintenancelogsettings_SyncErrors": "Sync Errors",
+      "ctc_maintenancelogsettingsid": "MaintenanceLogSettings",
+      "ctc_MasterLogsID": "MasterLogsID",
+      "ctc_name": "Name",
+      "ctc_nextscheduledlogdate": "NextScheduledLogDate",
+      "ctc_nextstartdate": "NextStartDate",
+      "ctc_overduealertemailaddress": "OverdueAlertEmailAddress",
+      "ctc_overduealertemailaddressonoff": "OverdueAlertEmailAddressOnOffEnglish",
+      "ctc_overdueemailalertfrequencyenglish": "OverdueEmailAlertFrequencyEnglish",
+      "ctc_overdueemailalertfrequencyfrench": "OverdueEmailAlertFrequencyFrench",
+      "ctc_reminderemailaddress": "ReminderEmailAddress",
+      "ctc_reminderemailaddressfrenquencyenglish": "ReminderEmailAddressFrenquencyEnglish",
+      "ctc_reminderemailaddressfrenquencyfrench": "ReminderEmailAddressFrenquencyFrench",
+      "ctc_reminderemailaddressonoff": "ReminderEmailAddressOnOffEnglish",
+      "ctc_reoccurrenceenglish": "ReOccurrenceEnglish",
+      "ctc_reoccurrencefrench": "ReOccurrenceFrench",
+      "ctc_runflowbydate": "RunFlowByDate",
+      "ctc_startdate": "StartDate",
+      "ctc_storedetails": "StoreDetails",
+      "ctc_StoreID": "StoreID",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Maintenance Log Settings",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Maintenance Log Settings (Views)",
+    "Name": "_ctc_maintenancelogsettings_views",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "18c1e967-7ac5-eb11-bacc-000d3a09c95b": "Sort by Next Scheduled Log Descending: English",
+      "18e3fc55-287f-425b-8a4c-bd73106f4177": "Active MaintenanceLogSettings",
+      "1cfb5146-3b8d-4baf-8ec7-e8896a977a09": "MaintenanceLogSettings Associated View",
+      "1e7a5fe0-4647-4755-9f2a-3ca76db23f0f": "MaintenanceLogSettings Lookup View",
+      "289f2795-1dc6-eb11-bacc-0022486d976c": "Sort by cadence descending: English",
+      "2f526da9-e7c4-4f3e-a7df-085f36a5e0c4": "Inactive MaintenanceLogSettings",
+      "41430037-4f28-46bd-bdf1-83a6c9fd31ba": "MaintenanceLogSettings Advanced Find View",
+      "55d51aeb-79c5-eb11-bacc-000d3a09c95b": "Sort by Next Scheduled Log Ascending: English",
+      "98111bff-b6dd-eb11-bacb-000d3ae85276": "MLS Name by Store",
+      "ae79bddf-7ec5-eb11-bacc-000d3a09c95b": "Default Schedule Manager"
+    }
+  },
+  {
+    "DisplayName": "CompleteOnEFD (Maintenance Log Settings)",
+    "Name": "ctc_ctc_maintenancelogsettings_completeonefd",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_completeonefd",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_completeonefd",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CompleteOnEFDFrench (Maintenance Log Settings)",
+    "Name": "ctc_ctc_maintenancelogsettings_completeonefdfrench",
+    "OptionSetInfoNameMapping": {
+      "0": "Non",
+      "1": "Oui"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_completeonefdfrench",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_completeonefdfrench",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CustomOverdueAlertCadenceDesired (Maintenance Log Settings)",
+    "Name": "ctc_ctc_maintenancelogsettings_customoverduealertcadencedesired",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_customoverduealertcadencedesired",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_customoverduealertcadencedesired",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CustomScheduleCadenceDesired (Maintenance Log Settings)",
+    "Name": "ctc_ctc_maintenancelogsettings_customschedulecadencedesired",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_customschedulecadencedesired",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_customschedulecadencedesired",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Initial Maintenance Log Created (Maintenance Log Settings)",
+    "Name": "ctc_ctc_maintenancelogsettings_initialmaintenancelogcreated",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_initialmaintenancelogcreated",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_initialmaintenancelogcreated",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "OverdueAlertEmailAddressOnOffEnglish (Maintenance Log Settings)",
+    "Name": "ctc_ctc_maintenancelogsettings_overduealertemailaddressonoff",
+    "OptionSetInfoNameMapping": {
+      "0": "Off",
+      "1": "On"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_overduealertemailaddressonoff",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_overduealertemailaddressonoff",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ReminderEmailAddressOnOffEnglish (Maintenance Log Settings)",
+    "Name": "ctc_ctc_maintenancelogsettings_reminderemailaddressonoff",
+    "OptionSetInfoNameMapping": {
+      "0": "Off",
+      "1": "On"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_reminderemailaddressonoff",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "ctc_reminderemailaddressonoff",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "DayOfTheWeekEnglish",
+    "Name": "ctc_dayoftheweekenglish",
+    "OptionSetInfoNameMapping": {
+      "0": "Sunday (0)",
+      "1": "Monday (1)",
+      "100000000": "Monday (100000000)",
+      "100000001": "Tuesday (100000001)",
+      "100000002": "Wednesday (100000002)",
+      "100000003": "Thursday (100000003)",
+      "100000004": "Friday (100000004)",
+      "100000005": "Saturday (100000005)",
+      "100000006": "Sunday (100000006)",
+      "2": "Tuesday (2)",
+      "3": "Wednesday (3)",
+      "4": "Thursday (4)",
+      "5": "Friday (5)",
+      "6": "Saturday (6)"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_dayoftheweekenglish",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "ctc_dayoftheweekenglish",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_dayoftheweekenglish",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "DayOfTheWeekFrench",
+    "Name": "ctc_dayoftheweekfrench",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Lundi",
+      "100000001": "Mardi",
+      "100000002": "Mercredi",
+      "100000003": "Jeudi",
+      "100000004": "Vendredi",
+      "100000005": "Samedi",
+      "100000006": "Dimanche"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_dayoftheweekfrench",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "ctc_dayoftheweekfrench",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_dayoftheweekfrench",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "LogOnOff",
+    "Name": "ctc_logonoff",
+    "OptionSetInfoNameMapping": {
+      "100000000": "On",
+      "100000001": "Off"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_logonoff",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_logonoff",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Maintenance Log Settings)",
+    "Name": "ctc_maintenancelogsettings_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Maintenance Log Settings)",
+    "Name": "ctc_maintenancelogsettings_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Overdue email alert frequency English",
+    "Name": "ctc_overdueemailalertfrequencyenglish",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Once",
+      "100000001": "Daily",
+      "100000002": "Weekly",
+      "100000003": "Monthly"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_overdueemailalertfrequencyenglish",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_overdueemailalertfrequencyenglish",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Overdue email alert frequency French",
+    "Name": "ctc_overdueemailalertfrequencyfrench",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Une fois",
+      "100000001": "Quotidien",
+      "100000002": "Hebdomadaire",
+      "100000003": "Mensuelle"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_overdueemailalertfrequencyfrench",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_overdueemailalertfrequencyfrench",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ReminderEmailAddressFrenquencyEnglish",
+    "Name": "ctc_reminderemailaddressfrenquencyenglish",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Once",
+      "100000001": "Daily",
+      "100000002": "Weekly",
+      "100000003": "Monthly"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_reminderemailaddressfrenquencyenglish",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_reminderemailaddressfrenquencyenglish",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ReminderEmailAddressFrenquencyFrench",
+    "Name": "ctc_reminderemailaddressfrenquencyfrench",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Une fois",
+      "100000001": "Quotidien",
+      "100000002": "Hebdomadaire",
+      "100000003": "Mensuelle"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_reminderemailaddressfrenquencyfrench",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_reminderemailaddressfrenquencyfrench",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ReOccurrenceEnglish",
+    "Name": "ctc_reoccurrenceenglish",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Monthly",
+      "100000001": "Quarterly",
+      "100000002": "Bi-Yearly",
+      "100000003": "Yearly"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_reoccurrenceenglish",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "ctc_reoccurrenceenglish",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      },
+      "OptionSetReferenceItem2": {
+        "OptionSetReferenceColumnName": "ctc_reoccurrenceenglish",
+        "OptionSetReferenceEntityName": "Maintenance logs"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_reoccurrenceenglish",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "ReOccurrenceFrench",
+    "Name": "ctc_reoccurrencefrench",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Mensuelle",
+      "100000001": "Trimestrielle",
+      "100000002": "Semestrielle",
+      "100000003": "Annuelle"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_reoccurrencefrench",
+        "OptionSetReferenceEntityName": "Maintenance Log Settings"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "ctc_reoccurrencefrench",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      },
+      "OptionSetReferenceItem2": {
+        "OptionSetReferenceColumnName": "ctc_reoccurrencefrench",
+        "OptionSetReferenceEntityName": "Maintenance logs"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_reoccurrencefrench",
+    "RelatedEntityName": "Maintenance Log Settings",
+    "Type": "OptionSetInfo"
+  }
+]

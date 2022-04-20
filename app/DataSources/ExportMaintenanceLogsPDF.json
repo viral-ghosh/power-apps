@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "a406f7f6-f5de-4808-a64b-0c3b126fb6b6",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "ExportMaintenanceLogsPDF",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

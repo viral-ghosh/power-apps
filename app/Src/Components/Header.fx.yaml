@@ -1,0 +1,50 @@
+Header As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =90
+    ScreenName: ="Text"
+    Width: =App.Width
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Rectangle1 As rectangle:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =90
+        OnSelect: =White
+        Width: =1366
+        ZIndex: =1
+
+    Logo As image:
+        Fill: =White
+        Height: =60
+        Image: ='Final Logo'
+        Width: =60
+        X: =30
+        Y: =10
+        ZIndex: =2
+
+    BottomLine As rectangle:
+        Fill: =RGBA(23,167,74,1)
+        Height: =10
+        Width: =1366
+        Y: =80
+        ZIndex: =3
+
+    Label1 As label:
+        Align: =Align.Center
+        FontWeight: =FontWeight.Bold
+        Height: =90
+        Size: =16
+        Text: =Header.ScreenName
+        Width: =1366
+        ZIndex: =4
+
+    Label2 As label:
+        FontWeight: =FontWeight.Semibold
+        Height: =20
+        Size: =10
+        Text: ="Real Estate Tracker"
+        Width: =172
+        Y: =60
+        ZIndex: =5
+

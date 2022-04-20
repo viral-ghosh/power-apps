@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "d95ff377-2263-4522-9ea7-d5e7df01b700",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "ExportMaintenanceLogs",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

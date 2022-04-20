@@ -1,0 +1,9 @@
+[
+  {
+    "AddinConnectorId": "ce6e2113-30c3-400c-a46f-6b1ae84164d3",
+    "AddinId": "6d1f157d-95bf-406d-b65d-cfd3240f724e",
+    "Name": "PrintLogExtended",
+    "ServiceKind": "AddinWadl",
+    "Type": "ServiceInfo"
+  }
+]

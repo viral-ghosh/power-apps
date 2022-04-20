@@ -1,0 +1,252 @@
+"DisplayLogPhotos As screen.'tabletLayout_HeaderAndGallery_ver3.0'":
+
+    RectQuickActionBar1 As rectangle:
+        Height: =64
+        Width: =Parent.Width
+        ZIndex: =1
+
+    Title1 As label:
+        Align: =Align.Center
+        Height: =64
+        PaddingRight: =10
+        Text: ="App name"
+        Width: =Parent.Width
+        ZIndex: =2
+
+    "TemplateGalleryList1 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =362
+        Items: =Filter('Maintenance logs', LogCompletedBy = "Kilo")
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =Min(160, Self.Height - 60)
+        Width: =657
+        Y: =64
+        ZIndex: =3
+
+        Image7 As image:
+            Height: =128
+            OnSelect: =Select(Parent)
+            Width: =128
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Title2 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.LogCompletedBy
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image7.Width - 104
+            X: =Image7.X + Image7.Width + 24
+            Y: =44
+            ZIndex: =2
+
+        Subtitle1 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.LogCompletedBy
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title2.Width
+            X: =Title2.X
+            Y: =Title2.Y + Title2.Height + 4
+            ZIndex: =3
+
+        NextArrow1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: |-
+                =Select( Parent );
+                
+                ClearCollect(colImages,Filter(
+                    AddColumns('Maintenance log photos', "NewImage", "No"),
+                    'Maintenance Log'.MaintenanceLogs=ThisItem.MaintenanceLogs))
+                
+                
+                //ThisItem.'Maintenance log photos')
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =4
+
+        Separator1 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+    "Gallery3 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Height: =339
+        Items: |-
+            =colImages
+            
+            //TemplateGalleryList1.Selected.'Maintenance log photos'
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =Min(160, Self.Height - 60)
+        Width: =709
+        X: =657
+        Y: =64
+        ZIndex: =4
+
+        Image8 As image:
+            Height: =128
+            Image: |-
+                =ThisItem.Image.Full
+                
+                //ThisItem.Image.Full
+            OnSelect: =Select(Parent)
+            Width: =128
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Title3 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Name
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image8.Width - 104
+            X: =Image8.X + Image8.Width + 24
+            Y: =44
+            ZIndex: =2
+
+        NextArrow2 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =4
+
+        Separator3 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+        Subtitle2_1 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.NewImage
+            VerticalAlign: =VerticalAlign.Top
+            Width: =148
+            X: =168
+            Y: =80
+            ZIndex: =6
+
+    Button1 As button:
+        OnSelect: =Reset(AddMediaButton1)
+        Text: ="Button"
+        X: =530
+        Y: =600
+        ZIndex: =8
+
+    Image11 As image:
+        Image: =Gallery3.Selected.Image8
+        X: =945
+        Y: =485
+        ZIndex: =14
+
+    Group1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =14
+
+        UploadedImage1 As image:
+            Height: =102
+            Image: =If(IsBlank(AddMediaButton1.Media), SampleImage, AddMediaButton1.Media)
+            ImagePosition: =ImagePosition.Fill
+            Width: =136
+            X: =216
+            Y: =426
+            ZIndex: =6
+
+        AddMediaButton1 As addMedia:
+            Height: =102
+            Size: =10
+            Text: ="Add Image"
+            Width: =136
+            X: =216
+            Y: =426
+            ZIndex: =7
+
+        btnNewComment_1 As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            DisplayMode: |
+                =DisplayMode.Edit
+            Fill: =ColorFade(varCTCLogoGreen,60%)
+            FocusedBorderThickness: =0
+            Height: =20
+            HoverFill: =varCTCDarkGrey
+            OnSelect: |-
+                =Collect(colImages, 
+                
+                {Image: {Full: AddMediaButton1.Media, Value: AddMediaButton1.Media}, Name: AddMediaButton1.FileName, NewImage: "Yes"});Reset(AddMediaButton1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =10
+            Text: |-
+                =With({varDefault:"Save",varOOBTextId:"btnSaveScheduledLog"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+            Width: =74
+            X: =247
+            Y: =541
+            ZIndex: =9
+
+        Circle1_1 As circle:
+            Fill: =varCTCLogoGreen
+            Height: =20
+            Width: =20
+            X: =340
+            Y: =418
+            ZIndex: =12
+
+        Label7_1 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =20
+            Size: =8
+            Text: =CountRows(colImages)
+            Width: =20
+            X: =340
+            Y: =418
+            ZIndex: =13
+

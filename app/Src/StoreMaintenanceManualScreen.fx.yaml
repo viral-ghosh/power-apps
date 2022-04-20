@@ -1,0 +1,33 @@
+StoreMaintenanceManualScreen As screen:
+    Fill: =RGBA(179,179,179,0.18)
+
+    PdfViewer1 As pdfViewer:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        Fill: =RGBA(0, 0, 0, 0.5)
+        Height: =613
+        Width: =1266
+        X: =86
+        Y: =116
+        ZIndex: =1
+
+    Header_3 As Header:
+        ScreenName: |-
+            =With({varDefault:"Real Estate Maintenance Manual",varOOBTextId:"componentTextStoreMaintenanceManual"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+        ZIndex: =2
+
+    MainMenu_leftnav_2 As LeftNavigation:
+        NavItems: =colNav
+        Width: =MainMenu_leftnav_2.MenuWidth
+        X: =0.00
+        Y: =90
+        ZIndex: =3
+
+    Image3_2 As image:
+        Height: =46
+        Image: =Blank()
+        OnSelect: =Navigate(AdminScreen)
+        Width: =52
+        X: =34+0
+        Y: =15+0
+        ZIndex: =4
+

@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "ctc_maintenancelogcommentses",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "ctc_maintenancelogcomments",
+    "MaxGetRowsCount": 2000,
+    "Name": "MaintenanceLogComments",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "ctc_logcomment": "LogComment",
+      "ctc_maintenancelogcomments_AsyncOperations": "System Jobs",
+      "ctc_maintenancelogcomments_BulkDeleteFailures": "Bulk Delete Failures",
+      "ctc_maintenancelogcomments_DuplicateBaseRecord": "Duplicate Records (ctc_maintenancelogcomments_DuplicateBaseRecord)",
+      "ctc_maintenancelogcomments_DuplicateMatchingRecord": "Duplicate Records (ctc_maintenancelogcomments_DuplicateMatchingRecord)",
+      "ctc_maintenancelogcomments_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "ctc_maintenancelogcomments_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "ctc_maintenancelogcomments_ProcessSession": "Process Sessions",
+      "ctc_maintenancelogcomments_SyncErrors": "Sync Errors",
+      "ctc_maintenancelogcommentsid": "MaintenanceLogComments",
+      "ctc_MaintenanceLogsID": "MaintenanceLogsID",
+      "ctc_name": "Name",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "MaintenanceLogComments",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "MaintenanceLogComments (Views)",
+    "Name": "_ctc_maintenancelogcomments_views",
+    "RelatedEntityName": "MaintenanceLogComments",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0c529b6f-87cb-eb11-bacc-0022486d74e8": "Default Canvas View",
+      "72330dc9-8b8c-4570-89a2-0957e01e9524": "MaintenanceLogComments Associated View",
+      "75c723a3-26f7-4273-8912-e9abb834058c": "Active MaintenanceLogComments",
+      "8e05ed41-a2ef-48ad-9235-dd67773867e8": "Inactive MaintenanceLogComments",
+      "95f8c449-eba7-4fd0-8478-ceab9c45863a": "MaintenanceLogComments Lookup View",
+      "e0ba90f8-e387-46c4-9969-1556644aa3a6": "MaintenanceLogComments Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Status (MaintenanceLogComments)",
+    "Name": "ctc_maintenancelogcomments_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "MaintenanceLogComments"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "MaintenanceLogComments",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (MaintenanceLogComments)",
+    "Name": "ctc_maintenancelogcomments_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "MaintenanceLogComments"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "MaintenanceLogComments",
+    "Type": "OptionSetInfo"
+  }
+]

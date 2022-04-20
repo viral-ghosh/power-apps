@@ -1,0 +1,3530 @@
+ScheduleManagerScreen As screen:
+    Fill: |-
+        =White
+        //RGBA(179,179,179,0.18)
+
+    Header_5 As Header:
+        ScreenName: |-
+            =With({varDefault:"Schedule Manager",varOOBTextId:"componentTextScheduleManager"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+
+    MainMenu_leftnav_4 As LeftNavigation:
+        NavItems: =colNav
+        Width: =MainMenu_leftnav_4.MenuWidth
+        X: =0.00
+        Y: =90
+
+    CaseAssignmentCanvas_2 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Height: =App.Height - 90
+        Width: =App.Width - MainMenu_leftnav.MenuWidth
+        X: =MainMenu_leftnav_4.MenuWidth
+        Y: =90
+        ZIndex: =3
+
+        CaseAssignmentDataCard_2 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =Parent.Height
+            Width: =Parent.Width
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            Image5 As image:
+                Height: =50
+                Image: =ImagePrinter
+                OnSelect: |-
+                    =Set(
+                        varPrintAllLogs,
+                        PrintAllLogs.Run(
+                            gblUserLanguage,
+                            Gallery1.Selected.StoreID.Name
+                        ).printfile
+                    );
+                    ClearCollect(
+                        colPrintAllLogs,
+                        varPrintAllLogs
+                    );
+                    ForAll(
+                        colPrintAllLogs,
+                        Launch(
+                            Value,
+                            {Teams: 1},
+                            LaunchTarget.New
+                        )
+                    )
+                Width: =50
+                X: =1226
+                Y: =566
+                ZIndex: =1
+
+            txtPrintAll As text:
+                Align: =Align.Center
+                BorderThickness: =0
+                Color: =RGBA(255, 255, 255, 1)
+                Default: |-
+                    =With({varDefault:"Print All",varOOBTextId:"txtPrintAll"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                DisplayMode: =DisplayMode.View
+                Fill: =varCTCDarkGrey
+                FontWeight: =FontWeight.Semibold
+                Mode: =TextMode.MultiLine
+                OnSelect: =
+                PaddingLeft: =5
+                Size: =9
+                Width: =70
+                X: =1216
+                Y: =620
+                ZIndex: =2
+
+            TextInput1_16 As text:
+                BorderThickness: =0
+                Color: =RGBA(255, 255, 255, 1)
+                Default: ="View"
+                DisplayMode: =DisplayMode.View
+                Fill: =varCTCDarkGrey
+                FontWeight: =FontWeight.Semibold
+                Height: =20
+                OnSelect: =
+                PaddingLeft: =5
+                Size: =9
+                Visible: =false
+                Width: =40
+                X: =1263
+                Y: =46
+                ZIndex: =10
+
+            btnHideSchedulesTurnedOff As button:
+                BorderThickness: =0
+                Fill: |-
+                    =If(LvarHideTurnOffSchedules,
+                    ColorFade(
+                    varCTCLogoRed, 60%),
+                    varCTCDarkGrey)
+                FocusedBorderThickness: =0
+                HoverFill: =varCTCDarkGrey
+                OnSelect: |
+                    =UpdateContext({LvarHideTurnOffSchedules: !LvarHideTurnOffSchedules})
+                RadiusBottomLeft: =5
+                RadiusBottomRight: =5
+                RadiusTopLeft: =5
+                RadiusTopRight: =5
+                Size: =10
+                Text: |-
+                    =With({varDefault:"Hide Schedules Turned Off",varOOBTextId:"btnHideSchedulesTurnedOff"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                X: =46
+                Y: =613
+                ZIndex: =13
+
+            Rectangle4 As rectangle:
+                Fill: =RGBA(0, 0, 0, 0.3)
+                Height: =Parent.Height
+                Visible: =LvarShowUpdateEmailReminders
+                Width: =Parent.Width
+                ZIndex: =14
+
+            btnUpdateAllLogReminders As button:
+                BorderThickness: =0
+                Fill: |-
+                    =If(LvarShowUpdateEmailReminders, ColorFade(
+                    varCTCLogoRed, 60%),
+                    
+                    varCTCDarkGrey)
+                FocusedBorderThickness: =0
+                HoverFill: =varCTCDarkGrey
+                OnSelect: |-
+                    =UpdateContext({LvarShowUpdateEmailReminders: !LvarShowUpdateEmailReminders})
+                    //If(LvarShowUpdateEmailReminders = true, Reset(galReminderEmails.AllItems))
+                RadiusBottomLeft: =5
+                RadiusBottomRight: =5
+                RadiusTopLeft: =5
+                RadiusTopRight: =5
+                Size: =10
+                Text: |-
+                    =With({varDefault:"Update All Log Reminders",varOOBTextId:"btnUpdateAllLogReminders"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                X: =46
+                Y: =566
+                ZIndex: =21
+
+            Rectangle4_1 As rectangle:
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Visible: =LvarShowUpdateIndividualEmails
+                Width: =Parent.Width
+                ZIndex: =22
+
+            Gallery As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =28
+
+                "Gallery1 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    Height: =474
+                    Items: |-
+                        =If(
+                            gblUserLanguage = "en-US",
+                            If(
+                                LvarHideTurnOffSchedules = true,
+                                Filter(
+                                    If(
+                                        Trim(SearchGallery_input.Text) <> "",
+                                        Search(
+                         If(
+                                                LvarSortbyNextScheduledLog = true,
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Ascending: English'
+                                                ),
+                                                LvarSortbyNextScheduledLog = false,
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Descending: English'
+                                                ),
+                                                LvarSortbyCadence = true,
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                                ),
+                                                LvarSortbyCadence = false,
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Sort by cadence descending: English'
+                                                ),
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                                )
+                                            ),
+                                            Trim(SearchGallery_input.Text),
+                                            "ctc_lognamesortfield"
+                                        ),
+                                        Trim(SearchGallery_input.Text) = "" Or Trim(SearchGallery_input.Text) = Blank(),
+                                        If(
+                                            LvarSortbyNextScheduledLog = true,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Ascending: English'
+                                            ),
+                                            LvarSortbyNextScheduledLog = false,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Descending: English'
+                                            ),
+                                            LvarSortbyCadence = false,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by cadence descending: English'
+                                            ),
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                            )
+                                        )
+                                    ),
+                                    LogOnOff = [@LogOnOff].On
+                                ),
+                        //No Schedules Hidden
+                                If(
+                                    Trim(SearchGallery_input.Text) <> "",
+                                    Search(
+                                        If(
+                                            LvarSortbyNextScheduledLog = true,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Ascending: English'
+                                            ),
+                                            LvarSortbyNextScheduledLog = false,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Descending: English'
+                                            ),
+                                            LvarSortbyCadence = true,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                            ),
+                                            LvarSortbyCadence = false,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by cadence descending: English'
+                                            ),
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                            )
+                                        ),
+                                        Trim(SearchGallery_input.Text),
+                                        "ctc_lognamesortfield"
+                                    ),
+                                    Trim(SearchGallery_input.Text) = "" Or Trim(SearchGallery_input.Text) = Blank(),
+                                    If(
+                                        LvarSortbyNextScheduledLog = true,
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Ascending: English'
+                                        ),
+                                        LvarSortbyNextScheduledLog = false,
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Descending: English'
+                                        ),
+                                        LvarSortbyCadence = true,
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                        ),
+                                        LvarSortbyCadence = false,
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Sort by cadence descending: English'
+                                        ),
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                        )
+                                    )
+                                )
+                            ),
+                        //If Lauguage is French
+                            gblUserLanguage = "fr-FR",
+                            If(
+                                LvarHideTurnOffSchedules = true,
+                                Filter(
+                                    If(
+                                        Trim(SearchGallery_input.Text) <> "",
+                                        Search(
+                                            If(
+                                                LvarSortbyNextScheduledLog = true,
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Ascending: English'
+                                                ),
+                                                LvarSortbyNextScheduledLog = false,
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Descending: English'
+                                                ),
+                                                LvarSortbyCadence = true,
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                                ),
+                                                LvarSortbyCadence = false,
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Sort by cadence descending: English'
+                                                ),
+                                                Filter(
+                                                    'Maintenance Log Settings',
+                                                    'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                                )
+                                            ),
+                                            Trim(SearchGallery_input.Text),
+                                            "ctc_lognamesortfieldfrench"
+                                        ),
+                                        Trim(SearchGallery_input.Text) = "" Or Trim(SearchGallery_input.Text) = Blank(),
+                                        If(
+                                            LvarSortbyNextScheduledLog = true,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Ascending: English'
+                                            ),
+                                            LvarSortbyNextScheduledLog = false,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Descending: English'
+                                            ),
+                                            LvarSortbyCadence = true,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                            ),
+                                            LvarSortbyCadence = false,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by cadence descending: English'
+                                            ),
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                            )
+                                        )
+                                    ),
+                                    LogOnOff = [@LogOnOff].On
+                                ),
+                        //No Schedules Hidden
+                                If(
+                                    Trim(SearchGallery_input.Text) <> "",
+                                    Search(
+                                        If(
+                                            LvarSortbyNextScheduledLog = true,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Ascending: English'
+                                            ),
+                                            LvarSortbyNextScheduledLog = false,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Descending: English'
+                                            ),
+                                            LvarSortbyCadence = true,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                            ),
+                                            LvarSortbyCadence = false,
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Sort by cadence descending: English'
+                                            ),
+                                            Filter(
+                                                'Maintenance Log Settings',
+                                                'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                            )
+                                        ),
+                                        Trim(SearchGallery_input.Text),
+                                        "ctc_lognamesortfieldfrench"
+                                    ),
+                                    Trim(SearchGallery_input.Text) = "" Or Trim(SearchGallery_input.Text) = Blank(),
+                                    If(
+                                        LvarSortbyNextScheduledLog = true,
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Ascending: English'
+                                        ),
+                                        LvarSortbyNextScheduledLog = false,
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Sort by Next Scheduled Log Descending: English'
+                                        ),
+                                        LvarSortbyCadence = true,
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                        ),
+                                        LvarSortbyCadence = false,
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Sort by cadence descending: English'
+                                        ),
+                                        Filter(
+                                            'Maintenance Log Settings',
+                                            'Maintenance Log Settings (Views)'.'Default Schedule Manager'
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    Layout: =Layout.Vertical
+                    ShowScrollbar: =false
+                    TemplatePadding: =0
+                    TemplateSize: =30
+                    Width: =1286
+                    X: =15
+                    Y: =80
+                    ZIndex: =3
+
+                    Separator2 As rectangle:
+                        Fill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 70%)
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =4
+
+                    TextInput1 As text:
+                        BorderThickness: =0
+                        Default: |-
+                            =If(gblUserLanguage = "en-US",  Text(ThisItem.ReOccurrenceEnglish) ,
+                            gblUserLanguage = "fr-FR", Text(ThisItem.ReOccurrenceFrench))
+                            
+                            
+                            
+                            //ThisItem.ReOccurrenceEnglish
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(242,242,242,1)
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =100
+                        X: =31
+                        Y: =5
+                        ZIndex: =9
+
+                    TextInput1_1 As text:
+                        BorderThickness: =0
+                        Default: |-
+                            =If(gblUserLanguage = "en-US",  Text(ThisItem.LogNameSortField) ,
+                            gblUserLanguage = "fr-FR", Text(ThisItem.LogNameSortFieldFrench))
+                            
+                            
+                            
+                            //ThisItem.MasterLogsID.Name
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(242,242,242,1)
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Size: =9
+                        Tooltip: =Self.Text
+                        Width: =335
+                        X: =381
+                        Y: =5
+                        ZIndex: =10
+
+                    TextInput1_2 As text:
+                        BorderThickness: =0
+                        Default: |
+                            =ThisItem.StartDate
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(242,242,242,1)
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =80
+                        X: =721
+                        Y: =5
+                        ZIndex: =11
+
+                    TextInput1_3 As text:
+                        BorderThickness: =0
+                        Default: |-
+                            =ThisItem.NextScheduledLogDate
+                            
+                            
+                            //If(TextInput1.Text="Yearly",DateAdd(ThisItem.StartDate,12,Months),TextInput1.Text="Quarterly",DateAdd(ThisItem.StartDate,3,Months),TextInput1.Text="Monthly",DateAdd(ThisItem.StartDate,1,Months))
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(242,242,242,1)
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =130
+                        X: =806
+                        Y: =5
+                        ZIndex: =12
+
+                    TextInput1_4 As text:
+                        BorderThickness: =0
+                        Default: |
+                            =ThisItem.ReminderEmailAddress
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(242,242,242,1)
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Size: =6
+                        Tooltip: =Self.Text
+                        Width: =80
+                        X: =941
+                        Y: =5
+                        ZIndex: =13
+
+                    TextInput1_5 As text:
+                        BorderThickness: =0
+                        Default: |
+                            =ThisItem.OverdueAlertEmailAddress
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(242,242,242,1)
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Size: =6
+                        Tooltip: =Self.Text
+                        Width: =80
+                        X: =1051
+                        Y: =5
+                        ZIndex: =14
+
+                    TextInput1_6 As text:
+                        Align: =Align.Center
+                        BorderThickness: =0
+                        Default: |
+                            =If(gblUserLanguage = "en-US", 
+                            If(
+                            Text(ThisItem.LogOnOff) = "On", "On",
+                            Text(ThisItem.LogOnOff) = "Off", "Off"),
+                            
+                            gblUserLanguage = "fr-FR", 
+                            If(
+                            Text(ThisItem.LogOnOff) = "On", "Marche",
+                            Text(ThisItem.LogOnOff) = "Off", "Arrêt"))
+                            
+                            
+                            
+                            
+                            
+                            //ThisItem.LogOnOff
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(242,242,242,1)
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =9
+                        Width: =52
+                        X: =1161
+                        Y: =5
+                        ZIndex: =15
+
+                    Toggle2 As toggleSwitch:
+                        Default: =If(ThisItem.LogOnOff=LogOnOff.On, true ,ThisItem.LogOnOff=LogOnOff.Off, false )
+                        FalseFill: =ColorFade(varCTCLogoRed,60%)
+                        FocusedBorderThickness: =0
+                        HandleFill: |-
+                            =ColorFade(
+                            varCTCDarkGrey, 30%)
+                        Height: =20
+                        OnSelect: |-
+                            =If(Self.Value = true,
+                            Patch('Maintenance Log Settings',LookUp('Maintenance Log Settings',Name=ThisItem.Name),{LogOnOff:LogOnOff.On}),
+                            
+                            Self.Value = false,
+                            Patch('Maintenance Log Settings',LookUp('Maintenance Log Settings',Name=ThisItem.Name),{LogOnOff:LogOnOff.Off}))
+                            
+                            ;
+                            
+                            Refresh('Maintenance Log Settings'); Refresh('Maintenance logs')
+                        ShowLabel: =false
+                        Size: =10
+                        TrueFill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 60%)
+                        Width: =40
+                        X: =1213
+                        Y: =5
+                        ZIndex: =19
+
+                    Image1 As image:
+                        Height: =26
+                        Image: =ImageRightArrow3
+                        OnSelect: |-
+                            =Select(Parent);ClearCollect(colSelectedMaintenanceLogSetting, ThisItem);UpdateContext({LvarViewIndividualLog: true})
+                        Width: =26
+                        X: =1260
+                        Y: =1
+                        ZIndex: =20
+
+                    Image2 As image:
+                        Height: =26
+                        Image: =ImagePrinter
+                        OnSelect: |-
+                            =If(
+                                gblUserLanguage = "en-US",
+                                Set(
+                                    varPrintFile,
+                                    ""
+                                );
+                                Set(
+                                    varPrintFile,
+                                    PrintLogExtended.Run(
+                                        Text(ThisItem.MasterLogsID.CategoryEnglish),
+                                        Text(ThisItem.MasterLogsID.Name),
+                                        Text(ThisItem.NextScheduledLogDate),
+                                        Text(ThisItem.MasterLogsID.Detail01English),
+                                        Text(ThisItem.StoreDetails),
+                                        "English",
+                                        {
+                                            text_4: Text(ThisItem.MasterLogsID.Detail02English),
+                                            text_5: Text(ThisItem.MasterLogsID.Detail03English),
+                                            text_6: Text(ThisItem.MasterLogsID.Detail04English),
+                                            text_7: Text(ThisItem.MasterLogsID.Detail05English),
+                                            text_8: Text(ThisItem.MasterLogsID.Detail06English),
+                                            text_9: Text(ThisItem.MasterLogsID.Detail07English),
+                                            text_10: Text(ThisItem.MasterLogsID.Detail08English),
+                                            text_11: Text(ThisItem.MasterLogsID.Detail09English),
+                                            text_12: Text(ThisItem.MasterLogsID.Detail10English)
+                                        }
+                                    ).printfile
+                                );
+                                ClearCollect(
+                                    colPrintFile,
+                                    varPrintFile
+                                );
+                                ForAll(
+                                    colPrintFile,
+                                    Launch(
+                                        Value,
+                                        {Teams: 1},
+                                        LaunchTarget.New
+                                    )
+                                ),
+                                gblUserLanguage = "fr-FR",
+                                Set(
+                                    varPrintFile,
+                                    ""
+                                );
+                                Set(
+                                    varPrintFile,
+                                    PrintLogExtended.Run(
+                                        Text(ThisItem.MasterLogsID.CategoryFrench),
+                                        Text(ThisItem.MasterLogsID.'Name French'),
+                                        Text(ThisItem.NextScheduledLogDate),
+                                        Text(ThisItem.MasterLogsID.Detail01French),
+                                        Text(ThisItem.StoreDetails),
+                                        "French",
+                                        {
+                                            text_4: Text(ThisItem.MasterLogsID.Detail02French),
+                                            text_5: Text(ThisItem.MasterLogsID.Detail03French),
+                                            text_6: Text(ThisItem.MasterLogsID.Detail04French),
+                                            text_7: Text(ThisItem.MasterLogsID.Detail05French),
+                                            text_8: Text(ThisItem.MasterLogsID.Detail06French),
+                                            text_9: Text(ThisItem.MasterLogsID.Detail07French),
+                                            text_10: Text(ThisItem.MasterLogsID.Detail08French),
+                                            text_11: Text(ThisItem.MasterLogsID.Detail09French),
+                                            text_12: Text(ThisItem.MasterLogsID.Detail10French)
+                                        }
+                                    ).printfile
+                                );
+                                ClearCollect(
+                                    colPrintFile,
+                                    varPrintFile
+                                );
+                                ForAll(
+                                    colPrintFile,
+                                    Launch(
+                                        Value,
+                                        {Teams: 1},
+                                        LaunchTarget.New
+                                    )
+                                )
+                            )
+                        Width: =26
+                        Y: =1
+                        ZIndex: =21
+
+                    TextInput1_9 As text:
+                        BorderThickness: =0
+                        Default: |-
+                            =If(gblUserLanguage = "en-US",  Text(ThisItem.MasterLogsID.CategoryEnglish) ,
+                            gblUserLanguage = "fr-FR", Text(ThisItem.MasterLogsID.CategoryFrench))
+                            
+                            
+                            //ThisItem.MasterLogsID.CategoryEnglish
+                        DisplayMode: =DisplayMode.View
+                        Fill: =RGBA(242,242,242,1)
+                        Height: =20
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =240
+                        X: =136
+                        Y: =5
+                        ZIndex: =22
+
+                    Image6 As image:
+                        Height: =20
+                        Image: =ImageEmail2
+                        OnSelect: |-
+                            =Select(Parent);
+                            Select(Parent);ClearCollect(colSelectedMaintenanceLogSetting, ThisItem);
+                            UpdateContext({LvarShowUpdateIndividualEmails: true})
+                        Width: =20
+                        X: =1026
+                        Y: =5
+                        ZIndex: =23
+
+                    Image6_1 As image:
+                        Height: =20
+                        Image: =ImageEmail2
+                        OnSelect: |-
+                            =Select(Parent);
+                            Select(Parent);ClearCollect(colSelectedMaintenanceLogSetting, ThisItem);
+                            UpdateContext({LvarShowUpdateIndividualEmails: true})
+                        Width: =20
+                        X: =1136
+                        Y: =5
+                        ZIndex: =24
+
+                txtCategory2 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Category",varOOBTextId:"txtCategory2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Width: =240
+                    X: =151
+                    Y: =40
+                    ZIndex: =4
+
+                txtLogName2 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Log Name",varOOBTextId:"txtLogName2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Width: =335
+                    X: =397
+                    Y: =40
+                    ZIndex: =5
+
+                txtStartDate2 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Start",varOOBTextId:"txtStartDate2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Width: =80
+                    X: =736
+                    Y: =40
+                    ZIndex: =6
+
+                txtEmailReminder2 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Email Reminder",varOOBTextId:"txtEmailReminder2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    Mode: =TextMode.MultiLine
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Width: =105
+                    X: =956
+                    Y: =40
+                    ZIndex: =7
+
+                txtOverdueAlert2 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Overdue Alert",varOOBTextId:"txtOverdueAlert2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    Mode: =TextMode.MultiLine
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Width: =105
+                    X: =1066
+                    Y: =40
+                    ZIndex: =8
+
+                txtOnOff As text:
+                    Align: =Align.Center
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"On/Off",varOOBTextId:"txtOnOff"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =9
+                    Width: =90
+                    X: =1176
+                    Y: =40
+                    ZIndex: =9
+
+                btnCadence2 As button:
+                    Align: =Align.Left
+                    BorderThickness: =0
+                    Fill: |-
+                        =If(LvarSortbyCadence = true,varCTCLogoGreen,
+                        LvarSortbyCadence = false,varCTCLogoRed,
+                        LvarSortbyCadence = Blank(),
+                        varCTCDarkGrey)
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCBlueGrey
+                    OnSelect: |-
+                        =If(LvarSortbyCadence = Blank() And Or(LvarSortbyNextScheduledLog = true, LvarSortbyNextScheduledLog = false),
+                        UpdateContext({LvarSortbyCadence: true, LvarSortbyNextScheduledLog: Blank()}),
+                        
+                        LvarSortbyCadence = Blank() And Or(LvarSortbyNextScheduledLog <> true, LvarSortbyNextScheduledLog <> false),
+                        UpdateContext({LvarSortbyCadence: false, LvarSortbyNextScheduledLog: Blank()}),
+                        
+                        
+                        LvarSortbyCadence = true,
+                        UpdateContext({LvarSortbyCadence: false, LvarSortbyNextScheduledLog: Blank()}),
+                        
+                        LvarSortbyCadence = false,
+                        UpdateContext({LvarSortbyCadence: Blank(), LvarSortbyNextScheduledLog: Blank()}))
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =9
+                    Text: |-
+                        =With({varDefault:"Cadence",varOOBTextId:"btnCadence2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =100
+                    X: =46
+                    Y: =40
+                    ZIndex: =11
+
+                txtNextScheduledLog2 As button:
+                    Align: =Align.Left
+                    BorderThickness: =0
+                    Fill: |-
+                        =If(LvarSortbyNextScheduledLog = true,varCTCLogoGreen,
+                        LvarSortbyNextScheduledLog = false,varCTCLogoRed,
+                        LvarSortbyNextScheduledLog = Blank(),
+                        varCTCDarkGrey)
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCBlueGrey
+                    OnSelect: |-
+                        =If(LvarSortbyNextScheduledLog = Blank(),
+                        UpdateContext({LvarSortbyNextScheduledLog: true, LvarSortbyCadence: Blank()}),
+                        
+                        LvarSortbyNextScheduledLog = true,
+                        UpdateContext({LvarSortbyNextScheduledLog: false, LvarSortbyCadence: Blank()}),
+                        
+                        LvarSortbyNextScheduledLog = false,
+                        UpdateContext({LvarSortbyNextScheduledLog: Blank(), LvarSortbyCadence: Blank()}))
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =9
+                    Text: |-
+                        =With({varDefault:"Next Scheduled Log",varOOBTextId:"txtNextScheduledLog2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =130
+                    X: =821
+                    Y: =40
+                    ZIndex: =12
+
+            Button1_1 As button:
+                BorderThickness: =0
+                Fill: |-
+                    =If(LvarShowUpdateEmailReminders, ColorFade(
+                    varCTCLogoRed, 60%),
+                    
+                    varCTCDarkGrey)
+                FocusedBorderThickness: =0
+                HoverFill: =varCTCDarkGrey
+                OnSelect: |-
+                    =UpdateContext({LvarShowUpdateIndividualEmails: false})
+                RadiusBottomLeft: =5
+                RadiusBottomRight: =5
+                RadiusTopLeft: =5
+                RadiusTopRight: =5
+                Size: =10
+                Text: |-
+                    =If(gblUserLanguage = "en-US", "Done"  ,
+                    gblUserLanguage = "fr-FR", "Terminé"
+                    
+                    )
+                Visible: =LvarShowUpdateIndividualEmails
+                X: =578
+                Y: =581
+                ZIndex: =29
+
+            Page2Background As rectangle:
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Visible: =LvarViewIndividualLog
+                Width: =Parent.Width
+                ZIndex: =30
+
+            Gallery2 As gallery.galleryVertical:
+                Height: =660
+                Items: =LookUp('Maintenance Log Settings', Name = GalleryFilter.Text)
+                Layout: =Layout.Vertical
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =651
+                Visible: =LvarViewIndividualLog
+                Width: =1316
+                Y: =13
+                ZIndex: =31
+
+                Rectangle2_4 As rectangle:
+                    BorderColor: |-
+                        =ColorFade(
+                        varCTCDarkGrey, 80%)
+                    BorderThickness: =2
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =168
+                    OnSelect: =Select(Parent)
+                    Width: =638
+                    X: =10
+                    Y: =396
+                    ZIndex: =1
+
+                Rectangle2_2 As rectangle:
+                    BorderColor: |-
+                        =ColorFade(
+                        varCTCDarkGrey, 80%)
+                    BorderThickness: =2
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =320
+                    OnSelect: =Select(Parent)
+                    Width: =638
+                    X: =668
+                    Y: =332
+                    ZIndex: =2
+
+                Rectangle2_1 As rectangle:
+                    BorderColor: |-
+                        =ColorFade(
+                        varCTCDarkGrey, 80%)
+                    BorderThickness: =2
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =320
+                    OnSelect: =Select(Parent)
+                    Width: =638
+                    X: =668
+                    ZIndex: =3
+
+                SearchGallery_input_3 As text:
+                    BorderThickness: =0
+                    Default: =ThisItem.StoreDetails
+                    Fill: =RGBA(179,179,179,0.18)
+                    FocusedBorderThickness: =0
+                    Height: =129
+                    HoverFill: =varCTCLightGreen01
+                    MaxLength: =400
+                    Mode: =TextMode.MultiLine
+                    PaddingLeft: =5
+                    Size: =11
+                    Width: =628
+                    X: =15
+                    Y: =430
+                    ZIndex: =7
+
+                SearchGallery_input_14 As text:
+                    BorderThickness: =0
+                    Color: =If(ThisItem.MasterLogsID.CorporateCompliance02 = 'CorporateCompliance02 (MasterMaintenanceLogs)'.Yes, DarkRed, Black)
+                    Default: =First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress
+                    Fill: =RGBA(179,179,179,0.18)
+                    FocusedBorderThickness: =0
+                    Height: =28
+                    HoverFill: =varCTCLightGreen01
+                    Mode: =TextMode.MultiLine
+                    PaddingLeft: =5
+                    Size: =11
+                    Tooltip: =Self.Text
+                    Width: =250
+                    X: =1022
+                    Y: =378
+                    ZIndex: =20
+
+                SearchGallery_input_15 As text:
+                    BorderThickness: =0
+                    Color: =If(ThisItem.MasterLogsID.CorporateCompliance02 = 'CorporateCompliance02 (MasterMaintenanceLogs)'.Yes, DarkRed, Black)
+                    Default: =First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress
+                    Fill: =RGBA(179,179,179,0.18)
+                    FocusedBorderThickness: =0
+                    Height: =28
+                    HoverFill: =varCTCLightGreen01
+                    Mode: =TextMode.MultiLine
+                    PaddingLeft: =5
+                    Size: =11
+                    Width: =250
+                    X: =1022
+                    Y: =486
+                    ZIndex: =27
+
+                btnBack2 As button:
+                    BorderThickness: =0
+                    Fill: |-
+                        =ColorFade(
+                        varCTCLogoRed, 60%)
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |-
+                        =UpdateContext({LvarViewIndividualLog: false})
+                        
+                        ;
+                        
+                        
+                        Select(ResetStuffButton)
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |-
+                        =With({varDefault:"Back",varOOBTextId:"btnBack2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    X: =130
+                    Y: =595
+                    ZIndex: =34
+
+                StartDate As group:
+                    Height: =5
+                    Width: =5
+                    X: =-213
+                    Y: =-1
+                    ZIndex: =34
+
+                    StartDate_rback As image:
+                        Fill: =RGBA(179,179,179,0.18)
+                        Height: =30
+                        Image: =Blank()
+                        PaddingRight: =0.00
+                        PaddingTop: =0.00
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Width: =250
+                        X: =1022
+                        Y: =50
+                        ZIndex: =9
+
+                    StartDate_date As datepicker:
+                        AccessibleLabel: ="DatePicker_Sample"
+                        BorderThickness: =0
+                        CalendarHeaderFill: =Colors.Primary1
+                        DefaultDate: |-
+                            =If(LvarRevertScheduleCadence, ThisItem.MasterLogsID.'Start Date',
+                            ThisItem.StartDate
+                            
+                            )
+                        Fill: =Transparent
+                        FocusedBorderThickness: =0
+                        Height: =30
+                        HoverBorderColor: =StartDate_date.BorderColor
+                        HoverDateFill: =Colors.Primary3
+                        HoverFill: =StartDate_date.Fill
+                        IconBackground: =Transparent
+                        IconFill: =varCTCDarkGrey
+                        InputTextPlaceholder: =Text("type or select")
+                        IsEditable: =true
+                        Language: =gblUserLanguage
+                        PaddingLeft: =5
+                        PaddingTop: =0.00
+                        PressedBorderColor: =StartDate_date.BorderColor
+                        PressedFill: =StartDate_date.Fill
+                        SelectedDateFill: =Colors.Primary1
+                        Size: =13
+                        Width: =250
+                        X: =1022
+                        Y: =50
+                        ZIndex: =10
+
+                btnSaveAllChanges As button:
+                    BorderThickness: =0
+                    Fill: |-
+                        =varCTCLogoGreen
+                        
+                        //ColorFade(varCTCLogoGreen,60%)
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |+
+                        =UpdateIf(
+                            'Maintenance Log Settings',
+                            Name = GalleryFilter.Text,
+                            {
+                                LogOnOff: If(Toggle2_1.Value = true, [@LogOnOff].On, Toggle2_1.Value = true, [@LogOnOff].Off),
+                                StoreDetails: SearchGallery_input_3.Text,
+                                StartDate:Null
+                                ,
+                                StartDate: StartDate_date.SelectedDate,
+                                ReOccurrenceEnglish: 
+                                If(gblUserLanguage = "en-US", cmbLogReOccurrenceEnglish.Selected.Value,
+                                gblUserLanguage = "fr-FR",
+                                If(cmbLogReOccurrenceFrench.Selected.Value = [@ReOccurrenceFrench].Mensuelle, [@ReOccurrenceEnglish].Monthly,
+                                cmbLogReOccurrenceFrench.Selected.Value = [@ReOccurrenceFrench].Trimestrielle, [@ReOccurrenceEnglish].Quarterly,
+                                cmbLogReOccurrenceFrench.Selected.Value = [@ReOccurrenceFrench].Semestrielle, [@ReOccurrenceEnglish].'Bi-Yearly',
+                                cmbLogReOccurrenceFrench.Selected.Value = [@ReOccurrenceFrench].Annuelle, [@ReOccurrenceEnglish].Yearly)),
+                                ReOccurrenceFrench:
+                                If(gblUserLanguage = "fr-FR",cmbLogReOccurrenceFrench.Selected.Value,
+                                gblUserLanguage = "en-US",
+                                If(cmbLogReOccurrenceEnglish.Selected.Value =  [@ReOccurrenceEnglish].Monthly,[@ReOccurrenceFrench].Mensuelle,
+                                cmbLogReOccurrenceEnglish.Selected.Value =  [@ReOccurrenceEnglish].Quarterly,[@ReOccurrenceFrench].Trimestrielle,
+                                cmbLogReOccurrenceEnglish.Selected.Value =  [@ReOccurrenceEnglish].'Bi-Yearly',[@ReOccurrenceFrench].Semestrielle,
+                                cmbLogReOccurrenceEnglish.Selected.Value =  [@ReOccurrenceEnglish].Yearly,[@ReOccurrenceFrench].Annuelle)),
+                        
+                                DayOfTheWeekEnglish: 
+                                If(gblUserLanguage = "en-US", cmbDayOfTheWeekEnglish.Selected.Value,
+                                gblUserLanguage = "fr-FR",
+                                If(cmbDayOfTheWeekFrench.Selected.Value = [@DayOfTheWeekFrench].Lundi, [@DayOfTheWeekEnglish].Monday,
+                                cmbDayOfTheWeekFrench.Selected.Value = [@DayOfTheWeekFrench].Mardi, [@DayOfTheWeekEnglish].Tuesday,
+                                cmbDayOfTheWeekFrench.Selected.Value = [@DayOfTheWeekFrench].Mercredi, [@DayOfTheWeekEnglish].Wednesday,
+                                cmbDayOfTheWeekFrench.Selected.Value = [@DayOfTheWeekFrench].Jeudi, [@DayOfTheWeekEnglish].Thursday,
+                                cmbDayOfTheWeekFrench.Selected.Value = [@DayOfTheWeekFrench].Vendredi, [@DayOfTheWeekEnglish].Friday,
+                                cmbDayOfTheWeekFrench.Selected.Value = [@DayOfTheWeekFrench].Samedi, [@DayOfTheWeekEnglish].Saturday,
+                                cmbDayOfTheWeekFrench.Selected.Value = [@DayOfTheWeekFrench].Dimanche, [@DayOfTheWeekEnglish].Sunday)),
+                        
+                                DayOfTheWeekFrench:
+                                If(gblUserLanguage = "fr-FR", cmbDayOfTheWeekFrench.Selected.Value,
+                                gblUserLanguage = "en-US",
+                                If(cmbDayOfTheWeekEnglish.Selected.Value = [@DayOfTheWeekEnglish].Monday, [@DayOfTheWeekFrench].Lundi, 
+                                cmbDayOfTheWeekEnglish.Selected.Value = [@DayOfTheWeekEnglish].Tuesday, [@DayOfTheWeekFrench].Mardi, 
+                                cmbDayOfTheWeekEnglish.Selected.Value =  [@DayOfTheWeekEnglish].Wednesday, [@DayOfTheWeekFrench].Mercredi,
+                                cmbDayOfTheWeekEnglish.Selected.Value =  [@DayOfTheWeekEnglish].Thursday, [@DayOfTheWeekFrench].Jeudi,
+                                cmbDayOfTheWeekEnglish.Selected.Value =  [@DayOfTheWeekEnglish].Friday, [@DayOfTheWeekFrench].Vendredi,
+                                cmbDayOfTheWeekEnglish.Selected.Value =  [@DayOfTheWeekEnglish].Saturday, [@DayOfTheWeekFrench].Samedi,
+                                cmbDayOfTheWeekEnglish.Selected.Value =  [@DayOfTheWeekEnglish].Sunday, [@DayOfTheWeekFrench].Dimanche)),
+                        
+                                CompleteOnEFD: 
+                                If(gblUserLanguage = "en-US", cmbCompleteOnEFD.Selected.Value,
+                                gblUserLanguage = "fr-FR",
+                                If(cmbCompleteOnEFDFrench.Selected.Value = 'CompleteOnEFDFrench (Maintenance Log Settings)'.Oui, 'CompleteOnEFD (Maintenance Log Settings)'.Yes,
+                                cmbCompleteOnEFDFrench.Selected.Value = 'CompleteOnEFDFrench (Maintenance Log Settings)'.Non, 'CompleteOnEFD (Maintenance Log Settings)'.No)),
+                        
+                                CompleteOnEFDFrench:
+                                If(gblUserLanguage = "fr-FR", cmbCompleteOnEFDFrench.Selected.Value,
+                                gblUserLanguage = "en-US",
+                                If(cmbCompleteOnEFD.Selected.Value =  'CompleteOnEFD (Maintenance Log Settings)'.Yes, 'CompleteOnEFDFrench (Maintenance Log Settings)'.Oui,
+                                cmbCompleteOnEFD.Selected.Value =  'CompleteOnEFD (Maintenance Log Settings)'.No, 'CompleteOnEFDFrench (Maintenance Log Settings)'.Non)),
+                        
+                                ReminderEmailAddress: SearchGallery_input_14.Text,
+                        
+                                ReminderEmailAddressFrenquencyEnglish:
+                                If(gblUserLanguage = "en-US", cmbReminderFrenquencyEnglish.Selected.Value,
+                                gblUserLanguage = "fr-FR",
+                                If(cmbReminderFrenquencyFrench.Selected.Value = [@ReminderEmailAddressFrenquencyFrench].'Une fois', [@ReminderEmailAddressFrenquencyEnglish].Once,
+                                cmbReminderFrenquencyFrench.Selected.Value = [@ReminderEmailAddressFrenquencyFrench].Quotidien, [@ReminderEmailAddressFrenquencyEnglish].Daily,        
+                                cmbReminderFrenquencyFrench.Selected.Value = [@ReminderEmailAddressFrenquencyFrench].Hebdomadaire, [@ReminderEmailAddressFrenquencyEnglish].Weekly,
+                                cmbReminderFrenquencyFrench.Selected.Value = [@ReminderEmailAddressFrenquencyFrench].Mensuelle, [@ReminderEmailAddressFrenquencyEnglish].Monthly)),
+                        
+                                ReminderEmailAddressFrenquencyFrench:
+                                If(gblUserLanguage = "fr-FR",cmbReminderFrenquencyFrench.Selected.Value,
+                                gblUserLanguage = "en-US",
+                                If(cmbReminderFrenquencyEnglish.Selected.Value =  [@ReminderEmailAddressFrenquencyEnglish].Once,[@ReminderEmailAddressFrenquencyFrench].'Une fois',
+                                cmbReminderFrenquencyEnglish.Selected.Value = [@ReminderEmailAddressFrenquencyEnglish].Daily, [@ReminderEmailAddressFrenquencyFrench].Quotidien,        
+                                cmbReminderFrenquencyEnglish.Selected.Value = [@ReminderEmailAddressFrenquencyEnglish].Weekly, [@ReminderEmailAddressFrenquencyFrench].Hebdomadaire, 
+                                cmbReminderFrenquencyEnglish.Selected.Value =  [@ReminderEmailAddressFrenquencyEnglish].Monthly, [@ReminderEmailAddressFrenquencyFrench].Mensuelle)),
+                        
+                                //ReminderEmailAddressOnOffEnglish: ComboBox1_4.Selected.Value,
+                        
+                                OverdueAlertEmailAddress: SearchGallery_input_15.Text,
+                        
+                                OverdueEmailAlertFrequencyEnglish: 
+                                If(gblUserLanguage = "en-US", cmbOverdueFrenquencyEnglish.Selected.Value,
+                                gblUserLanguage = "fr-FR",
+                                If(cmbOverdueFrenquencyFrench.Selected.Value = [@'Overdue email alert frequency French'].'Une fois', [@'Overdue email alert frequency English'].Once,
+                                cmbOverdueFrenquencyFrench.Selected.Value = [@'Overdue email alert frequency French'].Quotidien, [@'Overdue email alert frequency English'].Daily,        
+                                cmbOverdueFrenquencyFrench.Selected.Value = [@'Overdue email alert frequency French'].Hebdomadaire, [@'Overdue email alert frequency English'].Weekly,
+                                cmbOverdueFrenquencyFrench.Selected.Value = [@'Overdue email alert frequency French'].Mensuelle, [@'Overdue email alert frequency English'].Monthly)),
+                        
+                                OverdueEmailAlertFrequencyFrench: 
+                                If(gblUserLanguage = "fr-FR", cmbOverdueFrenquencyFrench.Selected.Value,
+                                gblUserLanguage = "en-US",
+                                If(cmbOverdueFrenquencyEnglish.Selected.Value =  [@'Overdue email alert frequency English'].Once,[@'Overdue email alert frequency French'].'Une fois',
+                                cmbOverdueFrenquencyEnglish.Selected.Value =  [@'Overdue email alert frequency English'].Daily,[@'Overdue email alert frequency French'].Quotidien,        
+                                cmbOverdueFrenquencyEnglish.Selected.Value = [@'Overdue email alert frequency English'].Weekly, [@'Overdue email alert frequency French'].Hebdomadaire, 
+                                cmbOverdueFrenquencyEnglish.Selected.Value = [@'Overdue email alert frequency English'].Monthly, [@'Overdue email alert frequency French'].Mensuelle))
+                        
+                               
+                                //OverdueAlertEmailAddressOnOffEnglish: ComboBox1_6.Selected.Value
+                            }
+                        );
+                        
+                        
+                        
+                        UpdateContext({LvarViewIndividualLog: false});
+                        
+                        Select(ResetStuffButton)
+                        
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |-
+                        =With({varDefault:"Save All Changes",varOOBTextId:"btnSaveAllChanges"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    X: =382
+                    Y: =595
+                    ZIndex: =35
+
+                ResetStuffButton As button:
+                    BorderThickness: =0
+                    Fill: |-
+                        =If(LvarShowUpdateEmailReminders, ColorFade(
+                        varCTCLogoRed, 60%),
+                        
+                        varCTCDarkGrey)
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |-
+                        =Concurrent(
+                        Reset(SearchGallery_input_3), 
+                        Reset(Toggle2_1),
+                        Reset(StartDate_date),
+                        Reset(cmbLogReOccurrenceEnglish),
+                        Reset(cmbDayOfTheWeekEnglish),
+                        Reset(cmbCompleteOnEFD),
+                        Reset(cmbReminderFrenquencyEnglish),
+                        Reset(ComboBox1_4),
+                        Reset(cmbOverdueFrenquencyEnglish),
+                        Reset(ComboBox1_6),
+                        UpdateContext({LvarRevertScheduleCadence: false}),
+                        UpdateContext({LvarRevertEmailCadence: false}),
+                        
+                        Clear(colSelectedMaintenanceLogSetting))
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |-
+                        ="Temp: Reset Stuff"
+                    Visible: =false
+                    X: =590
+                    Y: =610
+                    ZIndex: =36
+
+                btnRevertScheduleCadencetoDefault As button:
+                    BorderThickness: =0
+                    Fill: |-
+                        =If(LvarShowUpdateEmailReminders, ColorFade(
+                        varCTCLogoRed, 60%),
+                        
+                        varCTCDarkGrey)
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |
+                        =UpdateContext({LvarRevertScheduleCadence: true})
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |-
+                        =With({varDefault:"Revert Schedule Cadences to Default",varOOBTextId:"btnRevertScheduleCadencetoDefault"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    X: =704
+                    Y: =263
+                    ZIndex: =37
+
+                btnRevertEmailCadencestoDefault As button:
+                    BorderThickness: =0
+                    Fill: |-
+                        =If(LvarShowUpdateEmailReminders, ColorFade(
+                        varCTCLogoRed, 60%),
+                        
+                        varCTCDarkGrey)
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |-
+                        =UpdateContext({LvarRevertEmailCadence: true})
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |-
+                        =With({varDefault:"Revert Email Cadences to Default",varOOBTextId:"btnRevertEmailCadencestoDefault"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    X: =704
+                    Y: =595
+                    ZIndex: =38
+
+                ReOccuringEnglish As group:
+                    Height: =5
+                    Width: =5
+                    X: =40
+                    Y: =40
+                    ZIndex: =39
+
+                    StartDate_rback_1 As image:
+                        Fill: =RGBA(179,179,179,0.18)
+                        Height: =30
+                        Image: =Blank()
+                        PaddingRight: =0.00
+                        PaddingTop: =0.00
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Width: =250
+                        X: =1022
+                        Y: =100
+                        ZIndex: =11
+
+                    TextInput1_39 As text:
+                        BorderThickness: =0
+                        Color: =RGBA(255, 255, 255, 1)
+                        Default: =""
+                        DisplayMode: =DisplayMode.View
+                        Fill: =varCTCLogoRed
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        OnSelect: =
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =38
+                        X: =1234
+                        Y: =100
+                        ZIndex: =12
+
+                    cmbLogReOccurrenceEnglish As combobox:
+                        BorderThickness: =0
+                        ChevronBackground: =varCTCLogoRed
+                        ChevronFill: =White
+                        ChevronHoverBackground: =varCTCLogoRed
+                        ChevronHoverFill: =varCTCLogoRed
+                        DefaultSelectedItems: |-
+                            =If(LvarRevertScheduleCadence, [ThisItem.MasterLogsID.'ReOccurrence English'],
+                            
+                            [ThisItem.ReOccurrenceEnglish])
+                        DisplayFields: =["Value"]
+                        Fill: |-
+                            =varCTCLightGrey
+                            //If(!ReOccurringColor, Transparent, White)
+                        FocusedBorderThickness: =0
+                        Height: =26
+                        HoverFill: |-
+                            =
+                            
+                            ColorFade(varCTCLogoRed,60%)
+                        IsSearchable: =false
+                        Items: =Choices(ReOccurrenceEnglish)
+                        OnChange: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                        OnSelect: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: true})
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedFill: =Transparent
+                        Reset: =LvarViewIndividualLog
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionFill: =varCTCLogoRed
+                        SelectionTagFill: =varCTCLightGreen01
+                        SelectMultiple: =false
+                        Visible: =gblUserLanguage = "en-US"
+                        Width: =246
+                        X: =1023
+                        Y: =102
+                        ZIndex: =13
+
+                SearchGallery_input_17 As text:
+                    BorderThickness: =0
+                    Default: |-
+                        =If(gblUserLanguage = "en-US", 
+                        If(
+                        Toggle2_1.Value = true, "On",
+                        Toggle2_1.Value = false, "Off"),
+                        
+                        gblUserLanguage = "fr-FR", 
+                        If(
+                        Toggle2_1.Value = true, "Marche",
+                        Toggle2_1.Value = false, "Arrêt"))
+                        
+                        
+                        
+                        
+                        //ThisItem.LogOnOff
+                    DisplayMode: =DisplayMode.View
+                    Fill: =Transparent
+                    FocusedBorderThickness: =0
+                    Height: =30
+                    HoverFill: =varCTCLightGreen01
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =6
+                    PaddingTop: =0
+                    Tooltip: |-
+                        =If(gblUserLanguage = "en-US", 
+                        If(
+                        Text(Self.Text) = "On", "On",
+                        Text(Self.Text) = "Off", "Off"),
+                        
+                        gblUserLanguage = "fr-FR", 
+                        If(
+                        Text(Self.Text) = "On", "Marche",
+                        Text(Self.Text) = "Off", "Arrêt"))
+                    Width: =75
+                    X: =160
+                    Y: =80
+                    ZIndex: =43
+
+                ReOccuringEnglish_1 As group:
+                    Height: =5
+                    Width: =5
+                    X: =40
+                    Y: =-389
+                    ZIndex: =43
+
+                    StartDate_rback_2 As image:
+                        Fill: =RGBA(179,179,179,0.18)
+                        Height: =30
+                        Image: =Blank()
+                        PaddingRight: =0.00
+                        PaddingTop: =0.00
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Width: =250
+                        X: =1023
+                        Y: =154
+                        ZIndex: =14
+
+                    TextInput1_40 As text:
+                        BorderThickness: =0
+                        Color: =RGBA(255, 255, 255, 1)
+                        Default: =""
+                        DisplayMode: =DisplayMode.View
+                        Fill: =varCTCLogoRed
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        OnSelect: =
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =38
+                        X: =1234
+                        Y: =154
+                        ZIndex: =15
+
+                    cmbDayOfTheWeekEnglish As combobox:
+                        BorderThickness: =0
+                        ChevronBackground: =varCTCLogoRed
+                        ChevronFill: =White
+                        ChevronHoverBackground: =varCTCLogoRed
+                        ChevronHoverFill: =varCTCLogoRed
+                        DefaultSelectedItems: |-
+                            =If(LvarRevertScheduleCadence, [ThisItem.MasterLogsID.DayOfTheWeekEnglish],
+                            
+                            [ThisItem.DayOfTheWeekEnglish])
+                        DisplayFields: =["Value"]
+                        Fill: |-
+                            =varCTCLightGrey
+                            //If(!ReOccurringColor, Transparent, White)
+                        FocusedBorderThickness: =0
+                        Height: =26
+                        HoverFill: |-
+                            =
+                            
+                            ColorFade(varCTCLogoRed,60%)
+                        IsSearchable: =false
+                        Items: =Choices(DayOfTheWeekEnglish)
+                        OnChange: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                        OnSelect: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: true})
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedFill: =Transparent
+                        Reset: =LvarViewIndividualLog
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionFill: =varCTCLogoRed
+                        SelectionTagFill: =varCTCLightGreen01
+                        SelectMultiple: =false
+                        Visible: =gblUserLanguage = "en-US"
+                        Width: =246
+                        X: =1024
+                        Y: =156
+                        ZIndex: =16
+
+                lblScheduleDetails As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Schedule Details",varOOBTextId:"lblScheduleDetails"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =238
+                    X: =673
+                    ZIndex: =46
+
+                lblStartDate2 As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Start Date",varOOBTextId:"lblStartDate2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =125
+                    X: =698
+                    Y: =46
+                    ZIndex: =47
+
+                ReOccuringEnglish_2 As group:
+                    Height: =5
+                    Width: =5
+                    X: =40
+                    Y: =-449
+                    ZIndex: =47
+
+                    StartDate_rback_3 As image:
+                        Fill: =RGBA(179,179,179,0.18)
+                        Height: =30
+                        Image: =Blank()
+                        PaddingRight: =0.00
+                        PaddingTop: =0.00
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Width: =250
+                        X: =1022
+                        Y: =208
+                        ZIndex: =17
+
+                    TextInput1_41 As text:
+                        BorderThickness: =0
+                        Color: =RGBA(255, 255, 255, 1)
+                        Default: =""
+                        DisplayMode: =DisplayMode.View
+                        Fill: =varCTCLogoRed
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        OnSelect: =
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =38
+                        X: =1234
+                        Y: =208
+                        ZIndex: =18
+
+                    cmbCompleteOnEFD As combobox:
+                        BorderThickness: =0
+                        ChevronBackground: =varCTCLogoRed
+                        ChevronFill: =White
+                        ChevronHoverBackground: =varCTCLogoRed
+                        ChevronHoverFill: =varCTCLogoRed
+                        DefaultSelectedItems: |-
+                            =If(LvarRevertScheduleCadence, [ThisItem.MasterLogsID.CompleteOnEFD],
+                            
+                            [ThisItem.CompleteOnEFD])
+                        DisplayFields: =["Value"]
+                        Fill: |-
+                            =varCTCLightGrey
+                            //If(!ReOccurringColor, Transparent, White)
+                        FocusedBorderThickness: =0
+                        Height: =26
+                        HoverFill: |-
+                            =
+                            
+                            ColorFade(varCTCLogoRed,60%)
+                        IsSearchable: =false
+                        Items: =Choices('CompleteOnEFD (Maintenance Log Settings)')
+                        OnChange: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                        OnSelect: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: true})
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedFill: =Transparent
+                        Reset: =LvarViewIndividualLog
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionFill: =varCTCLogoRed
+                        SelectionTagFill: =varCTCLightGreen01
+                        SelectMultiple: =false
+                        Visible: =gblUserLanguage = "en-US"
+                        Width: =246
+                        X: =1023
+                        Y: =210
+                        ZIndex: =19
+
+                lblReoccuring As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        = If(gblUserLanguage="en-US","Recurrence",
+                         With({varDefault:"Recurrence",varOOBTextId:"lblReoccuring"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault))))
+                    Width: =125
+                    X: =698
+                    Y: =100
+                    ZIndex: =48
+
+                lblDayoftheWeek As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Day of the Week",varOOBTextId:"lblDayoftheWeek"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =213
+                    X: =698
+                    Y: =154
+                    ZIndex: =49
+
+                lblCompleteOnEFD As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =42
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Complete on EFD",varOOBTextId:"lblCompleteOnEFD"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =224
+                    X: =698
+                    Y: =208
+                    ZIndex: =50
+
+                lblReminderNotifications As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Reminders/Notifications",varOOBTextId:"lblReminderNotifications"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =329
+                    X: =673
+                    Y: =333
+                    ZIndex: =51
+
+                lblReminderEmailAddress As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Email Reminder",varOOBTextId:"lblReminderEmailAddress"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =224
+                    X: =698
+                    Y: =376
+                    ZIndex: =52
+
+                lblReminderCadence As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Reminder Cadance",varOOBTextId:"lblReminderCadence"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =179
+                    X: =698
+                    Y: =430
+                    ZIndex: =53
+
+                lblOverdueAlertEmailAddress As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Overdue Alert Email Address",varOOBTextId:"lblOverdueAlertEmailAddress"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =260
+                    X: =698
+                    Y: =484
+                    ZIndex: =54
+
+                ReOccuringEnglish_3 As group:
+                    Height: =5
+                    Width: =5
+                    X: =38
+                    Y: =-505
+                    ZIndex: =54
+
+                    StartDate_rback_4 As image:
+                        Fill: =RGBA(179,179,179,0.18)
+                        Height: =30
+                        Image: =Blank()
+                        PaddingRight: =0.00
+                        PaddingTop: =0.00
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Width: |
+                            =250
+                        X: =1024
+                        Y: =430
+                        ZIndex: =21
+
+                    TextInput1_45 As text:
+                        BorderThickness: =0
+                        Color: =RGBA(255, 255, 255, 1)
+                        Default: =""
+                        DisplayMode: =DisplayMode.View
+                        Fill: =varCTCLogoRed
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        OnSelect: =
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =38
+                        X: =1236
+                        Y: =430
+                        ZIndex: =22
+
+                    cmbReminderFrenquencyEnglish As combobox:
+                        BorderThickness: =0
+                        ChevronBackground: =varCTCLogoRed
+                        ChevronFill: =White
+                        ChevronHoverBackground: =varCTCLogoRed
+                        ChevronHoverFill: =varCTCLogoRed
+                        DefaultSelectedItems: |-
+                            =If(LvarRevertEmailCadence, [ReminderEmailAddressFrenquencyEnglish.Once], 
+                            
+                            [ThisItem.ReminderEmailAddressFrenquencyEnglish])
+                        DisplayFields: =["Value"]
+                        Fill: |-
+                            =varCTCLightGrey
+                            //If(!ReOccurringColor, Transparent, White)
+                        FocusedBorderThickness: =0
+                        Height: =26
+                        HoverFill: |-
+                            =
+                            
+                            ColorFade(varCTCLogoRed,60%)
+                        IsSearchable: =false
+                        Items: =Choices(ReminderEmailAddressFrenquencyEnglish)
+                        OnChange: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                        OnSelect: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: true})
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedFill: =Transparent
+                        Reset: =LvarViewIndividualLog
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionFill: =varCTCLogoRed
+                        SelectionTagFill: =varCTCLightGreen01
+                        SelectMultiple: =false
+                        Visible: =gblUserLanguage = "en-US"
+                        Width: =246
+                        X: =1025
+                        Y: =432
+                        ZIndex: =23
+
+                lblOverdueAlertCadence As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Overdue Alert Cadence",varOOBTextId:"lblOverdueAlertCadence"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =275
+                    X: =698
+                    Y: =538
+                    ZIndex: =55
+
+                Rectangle2_3 As rectangle:
+                    BorderColor: |-
+                        =ColorFade(
+                        varCTCDarkGrey, 80%)
+                    BorderThickness: =2
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =252
+                    OnSelect: =Select(Parent)
+                    Width: =638
+                    X: =10
+                    Y: =129
+                    ZIndex: =57
+
+                galMaintenanceDetails As gallery.galleryVertical:
+                    Height: =201
+                    Items: |-
+                        =If(gblUserLanguage = "en-US", 
+                        
+                        
+                        Table(
+                            {Detail: ThisItem.MasterLogsID.Detail01English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance01)},
+                            {Detail: ThisItem.MasterLogsID.Detail02English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance02)},
+                            {Detail: ThisItem.MasterLogsID.Detail03English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance03)},
+                            {Detail: ThisItem.MasterLogsID.Detail04English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance04)},
+                            {Detail: ThisItem.MasterLogsID.Detail05English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance05)},
+                            {Detail: ThisItem.MasterLogsID.Detail06English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance06)},
+                            {Detail: ThisItem.MasterLogsID.Detail07English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance07)},
+                            {Detail: ThisItem.MasterLogsID.Detail08English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance08)},
+                            {Detail: ThisItem.MasterLogsID.Detail09English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance09)},
+                            {Detail: ThisItem.MasterLogsID.Detail10English, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance10)}),
+                        
+                            gblUserLanguage = "fr-FR",   
+                        
+                        Table(
+                            {Detail: ThisItem.MasterLogsID.Detail01French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance01)},
+                            {Detail: ThisItem.MasterLogsID.Detail02French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance02)},
+                            {Detail: ThisItem.MasterLogsID.Detail03French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance03)},
+                            {Detail: ThisItem.MasterLogsID.Detail04French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance04)},
+                            {Detail: ThisItem.MasterLogsID.Detail05French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance05)},
+                            {Detail: ThisItem.MasterLogsID.Detail06French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance06)},
+                            {Detail: ThisItem.MasterLogsID.Detail07French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance07)},
+                            {Detail: ThisItem.MasterLogsID.Detail08French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance08)},
+                            {Detail: ThisItem.MasterLogsID.Detail09French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance09)},
+                            {Detail: ThisItem.MasterLogsID.Detail10French, Compliance: Text(ThisItem.MasterLogsID.CorporateCompliance10)}))
+                        
+                           
+                    Layout: =Layout.Vertical
+                    TemplatePadding: =0
+                    TemplateSize: =79
+                    Width: =630
+                    X: =13
+                    Y: =175
+                    ZIndex: =58
+
+                    Label3 As label:
+                        Color: |-
+                            =If(ThisItem.Compliance = "Yes", varCTCLogoRed, Black)
+                            
+                            //RGBA(0, 0, 0, 1)
+                        Height: =50
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =ThisItem.Detail
+                        VerticalAlign: =VerticalAlign.Top
+                        Visible: =false
+                        Width: =605
+                        X: =25
+                        Y: =4
+                        ZIndex: =1
+
+                    Circle2 As circle:
+                        Fill: =If(ThisItem.Compliance = "Yes", varCTCLogoRed, Black)
+                        Height: =8
+                        OnSelect: =Select(Parent)
+                        Visible: =If(!IsBlank(ThisItem.Detail), true)
+                        Width: =8
+                        X: =4
+                        Y: =9
+                        ZIndex: =2
+
+                    TextInput2 As text:
+                        BorderThickness: =0
+                        Color: =If(ThisItem.Compliance = "Yes", varCTCLogoRed, Black)
+                        Default: =ThisItem.Detail
+                        DisplayMode: =DisplayMode.View
+                        FocusedBorderThickness: =0
+                        Height: =75
+                        Mode: =TextMode.MultiLine
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =12
+                        Width: =605
+                        X: =25
+                        Y: =4
+                        ZIndex: =3
+
+                EmailOnOff As group:
+                    Height: =5
+                    Width: =5
+                    X: =-481
+                    Y: =-459
+                    ZIndex: =58
+
+                    StartDate_rback_5 As image:
+                        Fill: =RGBA(179,179,179,0.18)
+                        Height: =30
+                        Image: =Blank()
+                        PaddingRight: =0.00
+                        PaddingTop: =0.00
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Visible: =false
+                        Width: =77
+                        X: =1196
+                        Y: =430
+                        ZIndex: =24
+
+                    TextInput1_47 As text:
+                        BorderThickness: =0
+                        Color: =RGBA(255, 255, 255, 1)
+                        Default: =""
+                        DisplayMode: =DisplayMode.View
+                        Fill: =varCTCLogoRed
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        OnSelect: =
+                        PaddingLeft: =5
+                        Size: =9
+                        Visible: =false
+                        Width: =38
+                        X: =1236
+                        Y: =430
+                        ZIndex: =25
+
+                    ComboBox1_4 As combobox:
+                        BorderThickness: =0
+                        ChevronBackground: =varCTCLogoRed
+                        ChevronFill: =White
+                        ChevronHoverBackground: =varCTCLogoRed
+                        ChevronHoverFill: =varCTCLogoRed
+                        DefaultSelectedItems: |-
+                            =If(LvarRevertEmailCadence, ['ReminderEmailAddressOnOffEnglish (Maintenance Log Settings)'.On],
+                            
+                            [ThisItem.ReminderEmailAddressOnOffEnglish])
+                        DisplayFields: =["Value"]
+                        Fill: |-
+                            =varCTCLightGrey
+                            //If(!ReOccurringColor, Transparent, White)
+                        FocusedBorderThickness: =0
+                        Height: =26
+                        HoverFill: |-
+                            =
+                            
+                            ColorFade(varCTCLogoRed,60%)
+                        IsSearchable: =false
+                        Items: =Choices('ReminderEmailAddressOnOffEnglish (Maintenance Log Settings)')
+                        OnChange: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                        OnSelect: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: true})
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedFill: =Transparent
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionFill: =varCTCLogoRed
+                        SelectionTagFill: =varCTCLightGreen01
+                        SelectMultiple: =false
+                        Visible: =false
+                        Width: =73
+                        X: =1197
+                        Y: =432
+                        ZIndex: =26
+
+                lblStoreDetails As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Store Details",varOOBTextId:"lblStoreDetails"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =179
+                    X: =15
+                    Y: =396
+                    ZIndex: =59
+
+                lblMaitenanceDetails2 As label:
+                    FontWeight: =FontWeight.Bold
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: |-
+                        =With({varDefault:"Maintenance Details",varOOBTextId:"lblMaitenanceDetails2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    Width: =275
+                    X: =15
+                    Y: =131
+                    ZIndex: =60
+
+                cmbLogReOccurrenceFrench As combobox:
+                    BorderThickness: =0
+                    ChevronBackground: =varCTCLogoRed
+                    ChevronFill: =White
+                    ChevronHoverBackground: =varCTCLogoRed
+                    ChevronHoverFill: =varCTCLogoRed
+                    DefaultSelectedItems: |-
+                        =If(LvarRevertScheduleCadence, [ThisItem.MasterLogsID.'ReOccurrence French'],
+                        
+                        [ThisItem.ReOccurrenceFrench])
+                    DisplayFields: =["Value"]
+                    Fill: |-
+                        =varCTCLightGrey
+                        //If(!ReOccurringColor, Transparent, White)
+                    FocusedBorderThickness: =0
+                    Height: =26
+                    HoverFill: |-
+                        =
+                        
+                        ColorFade(varCTCLogoRed,60%)
+                    IsSearchable: =false
+                    Items: =Choices(ReOccurrenceFrench)
+                    OnChange: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                    OnSelect: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: true})
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedFill: =Transparent
+                    Reset: =LvarViewIndividualLog
+                    SearchFields: =["Value"]
+                    SearchItems: =[]
+                    SelectionFill: =varCTCLogoRed
+                    SelectionTagFill: =varCTCLightGreen01
+                    SelectMultiple: =false
+                    Visible: =gblUserLanguage = "fr-FR"
+                    Width: =246
+                    X: =1024
+                    Y: =102
+                    ZIndex: =61
+
+                cmbDayOfTheWeekFrench As combobox:
+                    BorderThickness: =0
+                    ChevronBackground: =varCTCLogoRed
+                    ChevronFill: =White
+                    ChevronHoverBackground: =varCTCLogoRed
+                    ChevronHoverFill: =varCTCLogoRed
+                    DefaultSelectedItems: |-
+                        =If(LvarRevertScheduleCadence, [ThisItem.MasterLogsID.DayOfTheWeekFrench],
+                        
+                        [ThisItem.DayOfTheWeekFrench])
+                    DisplayFields: =["Value"]
+                    Fill: |-
+                        =varCTCLightGrey
+                        //If(!ReOccurringColor, Transparent, White)
+                    FocusedBorderThickness: =0
+                    Height: =26
+                    HoverFill: |-
+                        =
+                        
+                        ColorFade(varCTCLogoRed,60%)
+                    IsSearchable: =false
+                    Items: =Choices(DayOfTheWeekFrench)
+                    OnChange: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                    OnSelect: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: true})
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedFill: =Transparent
+                    Reset: =LvarViewIndividualLog
+                    SearchFields: =["Value"]
+                    SearchItems: =[]
+                    SelectionFill: =varCTCLogoRed
+                    SelectionTagFill: =varCTCLightGreen01
+                    SelectMultiple: =false
+                    Visible: =gblUserLanguage = "fr-FR"
+                    Width: =246
+                    X: =1024
+                    Y: =156
+                    ZIndex: =62
+
+                cmbCompleteOnEFDFrench As combobox:
+                    BorderThickness: =0
+                    ChevronBackground: =varCTCLogoRed
+                    ChevronFill: =White
+                    ChevronHoverBackground: =varCTCLogoRed
+                    ChevronHoverFill: =varCTCLogoRed
+                    DefaultSelectedItems: |-
+                        =If(LvarRevertScheduleCadence, [ThisItem.MasterLogsID.CompleteOnEFDFrench],
+                        
+                        [ThisItem.CompleteOnEFDFrench])
+                    DisplayFields: =["Value"]
+                    Fill: |-
+                        =varCTCLightGrey
+                        //If(!ReOccurringColor, Transparent, White)
+                    FocusedBorderThickness: =0
+                    Height: =26
+                    HoverFill: |-
+                        =
+                        
+                        ColorFade(varCTCLogoRed,60%)
+                    IsSearchable: =false
+                    Items: =Choices('CompleteOnEFDFrench (Maintenance Log Settings)')
+                    OnChange: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                    OnSelect: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: true})
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedFill: =Transparent
+                    Reset: =LvarViewIndividualLog
+                    SearchFields: =["Value"]
+                    SearchItems: =[]
+                    SelectionFill: =varCTCLogoRed
+                    SelectionTagFill: =varCTCLightGreen01
+                    SelectMultiple: =false
+                    Visible: =gblUserLanguage = "fr-FR"
+                    Width: =246
+                    X: =1024
+                    Y: =210
+                    ZIndex: =63
+
+                cmbReminderFrenquencyFrench As combobox:
+                    BorderThickness: =0
+                    ChevronBackground: =varCTCLogoRed
+                    ChevronFill: =White
+                    ChevronHoverBackground: =varCTCLogoRed
+                    ChevronHoverFill: =varCTCLogoRed
+                    DefaultSelectedItems: |-
+                        =If(LvarRevertEmailCadence, [ReminderEmailAddressFrenquencyFrench.'Une fois'], 
+                        
+                        [ThisItem.ReminderEmailAddressFrenquencyFrench])
+                    DisplayFields: =["Value"]
+                    Fill: |-
+                        =varCTCLightGrey
+                        //If(!ReOccurringColor, Transparent, White)
+                    FocusedBorderThickness: =0
+                    Height: =26
+                    HoverFill: |-
+                        =
+                        
+                        ColorFade(varCTCLogoRed,60%)
+                    IsSearchable: =false
+                    Items: =Choices(ReminderEmailAddressFrenquencyFrench)
+                    OnChange: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                    OnSelect: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: true})
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedFill: =Transparent
+                    Reset: =LvarViewIndividualLog
+                    SearchFields: =["Value"]
+                    SearchItems: =[]
+                    SelectionFill: =varCTCLogoRed
+                    SelectionTagFill: =varCTCLightGreen01
+                    SelectMultiple: =false
+                    Visible: =gblUserLanguage = "fr-FR"
+                    Width: =246
+                    X: =1025
+                    Y: =432
+                    ZIndex: =64
+
+                ReOccuringEnglish_5 As group:
+                    Height: =5
+                    Width: =5
+                    X: =-280
+                    Y: =-336
+                    ZIndex: =64
+
+                    StartDate_rback_6 As image:
+                        Fill: =RGBA(179,179,179,0.18)
+                        Height: =30
+                        Image: =Blank()
+                        PaddingRight: =0.00
+                        PaddingTop: =0.00
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Width: =250
+                        X: =1024
+                        Y: =538
+                        ZIndex: =28
+
+                    TextInput1_49 As text:
+                        BorderThickness: =0
+                        Color: =RGBA(255, 255, 255, 1)
+                        Default: =""
+                        DisplayMode: =DisplayMode.View
+                        Fill: =varCTCLogoRed
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        OnSelect: =
+                        PaddingLeft: =5
+                        Size: =9
+                        Width: =38
+                        X: =1236
+                        Y: =538
+                        ZIndex: =29
+
+                    cmbOverdueFrenquencyEnglish As combobox:
+                        BorderThickness: =0
+                        ChevronBackground: =varCTCLogoRed
+                        ChevronFill: =White
+                        ChevronHoverBackground: =varCTCLogoRed
+                        ChevronHoverFill: =varCTCLogoRed
+                        DefaultSelectedItems: |-
+                            =If(LvarRevertEmailCadence, ['Overdue email alert frequency English'.Weekly],
+                            
+                            
+                            [ThisItem.OverdueEmailAlertFrequencyEnglish])
+                        DisplayFields: =["Value"]
+                        Fill: |-
+                            =varCTCLightGrey
+                            //If(!ReOccurringColor, Transparent, White)
+                        FocusedBorderThickness: =0
+                        Height: =26
+                        HoverFill: |-
+                            =
+                            
+                            ColorFade(varCTCLogoRed,60%)
+                        IsSearchable: =false
+                        Items: =Choices('Overdue email alert frequency English')
+                        OnChange: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                        OnSelect: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: true})
+                        PaddingBottom: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedFill: =Transparent
+                        Reset: =LvarViewIndividualLog
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionFill: =varCTCLogoRed
+                        SelectionTagFill: =varCTCLightGreen01
+                        SelectMultiple: =false
+                        Visible: =gblUserLanguage = "en-US"
+                        Width: =246
+                        X: =1025
+                        Y: =540
+                        ZIndex: =30
+
+                cmbOverdueFrenquencyFrench As combobox:
+                    BorderThickness: =0
+                    ChevronBackground: =varCTCLogoRed
+                    ChevronFill: =White
+                    ChevronHoverBackground: =varCTCLogoRed
+                    ChevronHoverFill: =varCTCLogoRed
+                    DefaultSelectedItems: |-
+                        =If(LvarRevertEmailCadence, ['Overdue email alert frequency French'.Hebdomadaire],
+                        
+                        
+                        [ThisItem.OverdueEmailAlertFrequencyFrench])
+                    DisplayFields: =["Value"]
+                    Fill: |-
+                        =varCTCLightGrey
+                        //If(!ReOccurringColor, Transparent, White)
+                    FocusedBorderThickness: =0
+                    Height: =26
+                    HoverFill: |-
+                        =
+                        
+                        ColorFade(varCTCLogoRed,60%)
+                    IsSearchable: =false
+                    Items: =Choices('Overdue email alert frequency French')
+                    OnChange: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                    OnSelect: |-
+                        =false
+                        //UpdateContext({ReOccurringColor: true})
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedFill: =Transparent
+                    Reset: =LvarViewIndividualLog
+                    SearchFields: =["Value"]
+                    SearchItems: =[]
+                    SelectionFill: =varCTCLogoRed
+                    SelectionTagFill: =varCTCLightGreen01
+                    SelectMultiple: =false
+                    Visible: =gblUserLanguage = "fr-FR"
+                    Width: =246
+                    X: =1025
+                    Y: =540
+                    ZIndex: =65
+
+                AlertOnOff As group:
+                    Height: =5
+                    Width: =5
+                    X: =-280
+                    Y: =-336
+                    ZIndex: =69
+
+                    StartDate_rback_7 As image:
+                        Fill: =RGBA(179,179,179,0.18)
+                        Height: =30
+                        Image: =Blank()
+                        PaddingRight: =0.00
+                        PaddingTop: =0.00
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Visible: =false
+                        Width: =77
+                        X: =1197
+                        Y: =538
+                        ZIndex: =31
+
+                    TextInput1_51 As text:
+                        BorderThickness: =0
+                        Color: =RGBA(255, 255, 255, 1)
+                        Default: =""
+                        DisplayMode: =DisplayMode.View
+                        Fill: =varCTCLogoRed
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        OnSelect: =
+                        PaddingLeft: =5
+                        Size: =9
+                        Visible: =false
+                        Width: =38
+                        X: =1236
+                        Y: =538
+                        ZIndex: =32
+
+                    ComboBox1_6 As combobox:
+                        BorderThickness: =0
+                        ChevronBackground: =varCTCLogoRed
+                        ChevronFill: =White
+                        ChevronHoverBackground: =varCTCLogoRed
+                        ChevronHoverFill: =varCTCLogoRed
+                        DefaultSelectedItems: |
+                            =If(LvarRevertEmailCadence, ['OverdueAlertEmailAddressOnOffEnglish (Maintenance Log Settings)'.On],
+                            
+                            [ThisItem.OverdueAlertEmailAddressOnOffEnglish])
+                        DisplayFields: =["Value"]
+                        Fill: |-
+                            =varCTCLightGrey
+                            //If(!ReOccurringColor, Transparent, White)
+                        FocusedBorderThickness: =0
+                        Height: =26
+                        HoverFill: |-
+                            =
+                            
+                            ColorFade(varCTCLogoRed,60%)
+                        IsSearchable: =false
+                        Items: =Choices('OverdueAlertEmailAddressOnOffEnglish (Maintenance Log Settings)')
+                        OnChange: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: !ReOccurringColor})
+                        OnSelect: |-
+                            =false
+                            //UpdateContext({ReOccurringColor: true})
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedFill: =Transparent
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionFill: =varCTCLogoRed
+                        SelectionTagFill: =varCTCLightGreen01
+                        SelectMultiple: =false
+                        Visible: =false
+                        Width: =73
+                        X: =1198
+                        Y: =540
+                        ZIndex: =33
+
+                LogNameSection As group:
+                    Height: =5
+                    Width: =5
+                    X: =60
+                    Y: =60
+                    ZIndex: =80
+
+                    Rectangle2 As rectangle:
+                        BorderColor: =ColorFade(varCTCDarkGrey,80%)
+                        BorderThickness: =2
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =115
+                        OnSelect: =Select(Parent)
+                        Width: =638
+                        X: =10
+                        ZIndex: =4
+
+                    SearchGallery_input_1 As text:
+                        BorderThickness: =0
+                        Default: |-
+                            =If(gblUserLanguage = "en-US", ThisItem.MasterLogsID.Name   ,
+                            gblUserLanguage = "fr-FR", ThisItem.MasterLogsID.'Name French')
+                            
+                            //ThisItem.MasterLogsID.Name
+                        DisplayMode: =DisplayMode.View
+                        Fill: =Transparent
+                        FocusedBorderThickness: =0
+                        Height: =30
+                        HoverFill: =varCTCLightGreen01
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =6
+                        PaddingTop: =0
+                        Tooltip: =Self.Text
+                        Width: =489
+                        X: =159
+                        ZIndex: =5
+
+                    Toggle2_1 As toggleSwitch:
+                        Default: =If(ThisItem.LogOnOff=LogOnOff.On, true ,ThisItem.LogOnOff=LogOnOff.Off, false )
+                        FalseFill: |-
+                            =ColorFade(
+                            varCTCLogoRed, 60%)
+                        FocusedBorderThickness: =0
+                        HandleFill: |-
+                            =ColorFade(
+                            varCTCDarkGrey, 30%)
+                        Height: =20
+                        OnSelect: |-
+                            =false
+                            
+                            //If(Self.Value= true ,Patch(MaintenanceLogSettings,LookUp(MaintenanceLogSettings,Name=ThisItem.Name),{LogOnOff:LogOnOff.On}),Self.Value= false ,Patch(MaintenanceLogSettings,LookUp(MaintenanceLogSettings,Name=ThisItem.Name),{LogOnOff:LogOnOff.Off}))
+                        ShowLabel: =false
+                        Size: =10
+                        TrueFill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 60%)
+                        Width: =40
+                        X: =251
+                        Y: =85
+                        ZIndex: =8
+
+                    lblLogName2 As label:
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            =With({varDefault:"Log Name",varOOBTextId:"txtLogName2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                        X: =10
+                        ZIndex: =39
+
+                    SearchGallery_input_16 As text:
+                        BorderThickness: =0
+                        Default: |-
+                            =If(gblUserLanguage = "en-US",  Text(ThisItem.MasterLogsID.CategoryEnglish) ,
+                            gblUserLanguage = "fr-FR", Text(ThisItem.MasterLogsID.CategoryFrench))
+                            
+                            
+                            
+                            //ThisItem.MasterLogsID.CategoryEnglish
+                        DisplayMode: =DisplayMode.View
+                        Fill: =Transparent
+                        FocusedBorderThickness: =0
+                        Height: =30
+                        HoverFill: =varCTCLightGreen01
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =6
+                        PaddingTop: =0
+                        Tooltip: =Self.Text
+                        Width: =489
+                        X: =159
+                        Y: =40
+                        ZIndex: =40
+
+                    lblCategory3 As label:
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            =With({varDefault:"Category",varOOBTextId:"txtCategory2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                        X: =10
+                        Y: =40
+                        ZIndex: =41
+
+                    lblOnOff2 As label:
+                        FontWeight: =FontWeight.Bold
+                        Height: =30
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            =With({varDefault:"On/Off",varOOBTextId:"txtOnOff"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                        X: =10
+                        Y: =80
+                        ZIndex: =42
+
+                    Rectangle3 As rectangle:
+                        Fill: =ColorFade(varCTCDarkGrey,80%)
+                        Height: =2
+                        OnSelect: =Select(Parent)
+                        Width: =628
+                        X: =15
+                        Y: =36
+                        ZIndex: =44
+
+                    Rectangle3_1 As rectangle:
+                        Fill: =ColorFade(varCTCDarkGrey,80%)
+                        Height: =2
+                        OnSelect: =Select(Parent)
+                        Width: =628
+                        X: =15
+                        Y: =74
+                        ZIndex: =45
+
+            EmailReminderUpdate As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =31
+
+                "galReminderEmails As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    Height: =152
+                    Items: |-
+                        =Table({Email: ""}, {Email: ""}, {Email: ""}, {Email: ""}, {Email: ""})
+                    Layout: =Layout.Vertical
+                    TemplatePadding: =0
+                    TemplateSize: =30
+                    Visible: =LvarShowUpdateEmailReminders
+                    Width: =330
+                    X: |
+                        =252+18
+                    Y: =416
+                    ZIndex: =15
+
+                    Separator2_3 As rectangle:
+                        Fill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 70%)
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =4
+
+                    ReminderEmail_input As text:
+                        BorderThickness: =0
+                        Default: =ThisItem.Email
+                        Fill: =RGBA(242,242,242,1)
+                        FocusedBorderThickness: =0
+                        Height: =20
+                        HoverFill: =varCTCLightGreen01
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Reset: =LvarShowUpdateEmailReminders
+                        Size: =10
+                        Width: =330
+                        Y: =5
+                        ZIndex: =9
+
+                Button1_6 As button:
+                    BorderThickness: =0
+                    Fill: =varCTCLogoGreen
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |+
+                        =UpdateIf('Maintenance Log Settings', And(StoreID.Name = Gallery1.Selected.StoreID.Name, CustomScheduleCadenceDesired = 'CustomScheduleCadenceDesired (Maintenance Log Settings)'.No),
+                        
+                        {ReminderEmailAddress: Concat(Filter(galReminderEmails.AllItems,!IsBlank(ReminderEmail_input.Text)),ReminderEmail_input.Text,";")})
+                        
+                        
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |-
+                        =If(gblUserLanguage = "en-US", "Update All Emails for " & Gallery1.Selected.StoreID.Name  ,
+                        gblUserLanguage = "fr-FR", "Mettre à jour toutes les adresses de courriel " & Gallery1.Selected.StoreID.Name
+                        
+                        )
+                        //Mettre à jour toutes les adresses de courriel
+                        //"Update All Emails for " & Gallery1.Selected.StoreID.Name
+                    Visible: =LvarShowUpdateEmailReminders
+                    Width: =180
+                    X: |+
+                        =337+18-20
+                        
+                    Y: =581
+                    ZIndex: =16
+
+                TextInput1_12 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Email Reminder",varOOBTextId:"txtEmailReminder2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    Height: =20
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Visible: =LvarShowUpdateEmailReminders
+                    Width: =330
+                    X: |
+                        =252+18
+                    Y: =396
+                    ZIndex: =17
+
+            OverdueAlertUpdate As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =31
+
+                "galOverdueReminderEmails As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    Height: =152
+                    Items: |-
+                        =Table({Email: ""}, {Email: ""}, {Email: ""}, {Email: ""}, {Email: ""})
+                    Layout: =Layout.Vertical
+                    TemplatePadding: =0
+                    TemplateSize: =30
+                    Visible: =LvarShowUpdateEmailReminders
+                    Width: =330
+                    X: |
+                        =986-270
+                    Y: =416
+                    ZIndex: =18
+
+                    Separator2_4 As rectangle:
+                        Fill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 70%)
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =4
+
+                    ReminderEmail_input_1 As text:
+                        BorderThickness: =0
+                        Default: =ThisItem.Email
+                        Fill: =RGBA(242,242,242,1)
+                        FocusedBorderThickness: =0
+                        Height: =20
+                        HoverFill: =varCTCLightGreen01
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Reset: =LvarShowUpdateEmailReminders
+                        Size: =10
+                        Width: =330
+                        Y: =5
+                        ZIndex: =9
+
+                Button1_7 As button:
+                    BorderThickness: =0
+                    Fill: =varCTCLogoGreen
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |
+                        =UpdateIf('Maintenance Log Settings',
+                        And(StoreID.Name = Gallery1.Selected.StoreID.Name, CustomOverdueAlertCadenceDesired = 'CustomOverdueAlertCadenceDesired (Maintenance Log Settings)'.No)
+                        
+                        , {OverdueAlertEmailAddress: Concat(Filter(galOverdueReminderEmails.AllItems,!IsBlank(ReminderEmail_input_1.Text)),ReminderEmail_input_1.Text,";")})
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |-
+                        =If(gblUserLanguage = "en-US", "Update All Emails for " & Gallery1.Selected.StoreID.Name  ,
+                        gblUserLanguage = "fr-FR", "Mettre à jour toutes les adresses de courriel " & Gallery1.Selected.StoreID.Name
+                        
+                        )
+                    Visible: =LvarShowUpdateEmailReminders
+                    Width: =180
+                    X: |
+                        =1081-270-20
+                    Y: =581
+                    ZIndex: =19
+
+                TextInput1_18 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Overdue Alert",varOOBTextId:"txtOverdueAlert2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    Height: =20
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Visible: =LvarShowUpdateEmailReminders
+                    Width: =330
+                    X: |
+                        =986-270
+                    Y: =396
+                    ZIndex: =20
+
+            Rectangle4_2 As rectangle:
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =Parent.Height
+                Visible: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                Width: =Parent.Width
+                ZIndex: =32
+
+            EmailReminderUpdate_1 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =32
+
+                "galReminderEmails_1 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    Height: =152
+                    Items: |-
+                        =If(
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress
+                        ,";")) = 5, 
+                        
+                        //Email: Last(FirstN(Split(Gallery1.Selected.ReminderEmailAddress,";").Result,1).Result).Result}
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,3).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,4).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,5).Result).Result}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";")) = 4,
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,3).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,4).Result).Result},
+                        {Email: ""}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";")) = 3,
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,3).Result).Result},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";")) = 2,
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,2).Result).Result},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";")) = 1,
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";").Result,1).Result).Result},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).ReminderEmailAddress,";")) = 0,
+                        
+                        Table({Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}))
+                        
+                        
+                            
+                            
+                            
+                            
+                        
+                        
+                            
+                            
+                    Layout: =Layout.Vertical
+                    TemplatePadding: =0
+                    TemplateSize: =30
+                    Visible: =LvarShowUpdateIndividualEmails
+                    Width: =330
+                    X: |
+                        =252+18
+                    Y: =416
+                    ZIndex: =23
+
+                    Separator2_5 As rectangle:
+                        Fill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 70%)
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =4
+
+                    ReminderEmail_input_2 As text:
+                        BorderThickness: =0
+                        Default: =ThisItem.Email
+                        Fill: =RGBA(242,242,242,1)
+                        FocusedBorderThickness: =0
+                        Height: =20
+                        HoverFill: =varCTCLightGreen01
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Reset: =LvarShowUpdateIndividualEmails
+                        Size: =10
+                        Width: =330
+                        Y: =5
+                        ZIndex: =9
+
+                Button1_9 As button:
+                    BorderThickness: =0
+                    Fill: =varCTCLogoGreen
+                    FocusedBorderThickness: =0
+                    Height: =60
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |+
+                        =Patch('Maintenance Log Settings',
+                        Gallery1.Selected
+                        
+                        , {
+                        ReminderEmailAddress: Concat(Filter(galReminderEmails_1.AllItems,!IsBlank(ReminderEmail_input_2.Text)),ReminderEmail_input_2.Text,";"),
+                        CustomScheduleCadenceDesired: 'CustomScheduleCadenceDesired (Maintenance Log Settings)'.Yes
+                        })
+                        ;
+                        //UpdateContext({LvarShowUpdateEmailReminders: false})
+                        
+                        
+                        //)
+                        
+                        //Jessica.Yu@cantire.com;Amanda.Maloney@cantire.com;Garner.McJannett@cantire.com;Kyla.Skinner@cantire.com;CJ.Yap@cantire.com
+                        
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |
+                        =If(gblUserLanguage = "en-US", "Update Reminder Emails for Selected Log"  ,
+                        gblUserLanguage = "fr-FR", "Mettre à jour les courriels de rappel pour le journal sélectionné"
+                        
+                        )
+                    Visible: =LvarShowUpdateIndividualEmails
+                    Width: =220
+                    X: |+
+                        =337+18-40
+                        
+                    Y: =571
+                    ZIndex: =24
+
+                TextInput1_20 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Email Reminder",varOOBTextId:"txtEmailReminder2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    Height: =20
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Visible: =LvarShowUpdateIndividualEmails
+                    Width: =330
+                    X: |
+                        =252+18
+                    Y: =396
+                    ZIndex: =25
+
+            OverdueAlertUpdate_1 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =33
+
+                "galOverdueReminderEmails_1 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    Height: =152
+                    Items: |-
+                        =If(
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";")) = 5, 
+                        
+                        //Email: Last(FirstN(Split(Gallery1.Selected.ReminderEmailAddress,";").Result,1).Result).Result}
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,3).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,4).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,5).Result).Result}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";")) = 4,
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,3).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,4).Result).Result},
+                        {Email: ""}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";")) = 3,
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,3).Result).Result},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";")) = 2,
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,2).Result).Result},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";")) = 1,
+                        
+                        Table({Email: Last(FirstN(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";").Result,1).Result).Result},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(LookUp('Maintenance Log Settings', Name = GalleryFilter.Text).OverdueAlertEmailAddress,";")) = 0,
+                        
+                        Table({Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}))
+                        
+                        
+                            
+                            
+                            
+                            
+                        
+                        
+                            
+                            
+                    Layout: =Layout.Vertical
+                    TemplatePadding: =0
+                    TemplateSize: =30
+                    Visible: =LvarShowUpdateIndividualEmails
+                    Width: =330
+                    X: |
+                        =986-270
+                    Y: =416
+                    ZIndex: =26
+
+                    Separator2_6 As rectangle:
+                        Fill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 70%)
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =4
+
+                    ReminderEmail_input_3 As text:
+                        BorderThickness: =0
+                        Default: =ThisItem.Email
+                        Fill: =RGBA(242,242,242,1)
+                        FocusedBorderThickness: =0
+                        Height: =20
+                        HoverFill: =varCTCLightGreen01
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Reset: =LvarShowUpdateIndividualEmails
+                        Size: =10
+                        Width: =330
+                        Y: =5
+                        ZIndex: =9
+
+                Button1_10 As button:
+                    BorderThickness: =0
+                    Fill: =varCTCLogoGreen
+                    FocusedBorderThickness: =0
+                    Height: =60
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |+
+                        =Patch('Maintenance Log Settings',
+                        Gallery1.Selected
+                        
+                        , {
+                        OverdueAlertEmailAddress: Concat(Filter(galOverdueReminderEmails_1.AllItems,!IsBlank(ReminderEmail_input_3.Text)),ReminderEmail_input_3.Text,";"),
+                        CustomOverdueAlertCadenceDesired: 'CustomOverdueAlertCadenceDesired (Maintenance Log Settings)'.Yes
+                        
+                        })
+                        ;
+                        //UpdateContext({LvarShowUpdateOverdueEmailReminders: false})
+                        
+                        
+                        
+                        //)
+                        
+                        //Jessica.Yu@cantire.com;Amanda.Maloney@cantire.com;Garner.McJannett@cantire.com;Kyla.Skinner@cantire.com;CJ.Yap@cantire.com
+                        
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: |-
+                        =If(gblUserLanguage = "en-US", "Update Overdue Alert Emails for Selected Log"  ,
+                        gblUserLanguage = "fr-FR", "Mettre à jour les courriels d’alerte en retard pour le journal sélectionné"
+                        
+                        )
+                        
+                        
+                        //"Update Overdue Alert Emails for Selected Log"
+                    Visible: =LvarShowUpdateIndividualEmails
+                    Width: =220
+                    X: |
+                        =1081-270-40
+                    Y: =571
+                    ZIndex: =27
+
+                TextInput1_21 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: |-
+                        =With({varDefault:"Overdue Alert",varOOBTextId:"txtOverdueAlert2"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    Height: =20
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Visible: =LvarShowUpdateIndividualEmails
+                    Width: =330
+                    X: |
+                        =986-270
+                    Y: =396
+                    ZIndex: =28
+
+            Button1_15 As button:
+                BorderThickness: =0
+                Fill: |-
+                    =If(LvarShowUpdateEmailReminders, ColorFade(
+                    varCTCLogoRed, 60%),
+                    
+                    varCTCDarkGrey)
+                FocusedBorderThickness: =0
+                HoverFill: =varCTCDarkGrey
+                OnSelect: |-
+                    =UpdateContext({LvarShowUpdateIndividualEmailsViewingIndividualLog: false})
+                RadiusBottomLeft: =5
+                RadiusBottomRight: =5
+                RadiusTopLeft: =5
+                RadiusTopRight: =5
+                Size: =10
+                Text: ="Done"
+                Visible: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                X: =578
+                Y: =581
+                ZIndex: =39
+
+            EmailReminderUpdate_2 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =39
+
+                "galReminderEmails_2 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    Height: =152
+                    Items: |-
+                        =If(CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";")) = 5,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,3).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,4).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,5).Result).Result}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";")) = 4,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,3).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,4).Result).Result},
+                        {Email: Blank()}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";")) = 3,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,3).Result).Result},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";")) = 2,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,2).Result).Result},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";")) = 1,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";").Result,1).Result).Result},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_reminderemailaddress,";")) = 0,
+                        
+                        Table({Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}))
+                        
+                            
+                            
+                    Layout: =Layout.Vertical
+                    TemplatePadding: =0
+                    TemplateSize: =30
+                    Visible: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                    Width: =330
+                    X: |
+                        =252+18
+                    Y: =416
+                    ZIndex: =33
+
+                    Separator2_7 As rectangle:
+                        Fill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 70%)
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =4
+
+                    ReminderEmail_input_4 As text:
+                        BorderThickness: =0
+                        Default: =ThisItem.Email
+                        Fill: =RGBA(242,242,242,1)
+                        FocusedBorderThickness: =0
+                        Height: =20
+                        HoverFill: =varCTCLightGreen01
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Reset: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                        Size: =10
+                        Width: =330
+                        Y: =5
+                        ZIndex: =9
+
+                Button1_13 As button:
+                    BorderThickness: =0
+                    Fill: =varCTCLogoGreen
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |+
+                        =Patch(colSelectedMaintenanceLogSetting,
+                        LookUp(colSelectedMaintenanceLogSetting, ctc_name = GalleryFilter.Text)
+                        
+                        
+                        , {ctc_reminderemailaddress: Concat(Filter(galReminderEmails_2.AllItems,!IsBlank(ReminderEmail_input_4.Text)),ReminderEmail_input_4.Text,";")})
+                        ;
+                        
+                        
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: ="Update Reminder Emails for Selected Log"
+                    Visible: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                    X: |
+                        =337+18
+                    Y: =581
+                    ZIndex: =34
+
+                TextInput1_53 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: ="Email Reminder"
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    Height: =20
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Visible: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                    Width: =330
+                    X: |
+                        =252+18
+                    Y: =396
+                    ZIndex: =35
+
+            OverdueAlertUpdate_2 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =40
+
+                "galOverdueReminderEmails_2 As gallery.'BrowseLayout_Vertical_TwoTextVariant_ver4.0'":
+                    Height: =152
+                    Items: |-
+                        =If(CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";")) = 5,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,3).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,4).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,5).Result).Result}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";")) = 4,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,3).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,4).Result).Result},
+                        {Email: Blank()}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";")) = 3,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,2).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,3).Result).Result},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";")) = 2,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,1).Result).Result},
+                        {Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,2).Result).Result},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";")) = 1,
+                        
+                        Table({Email: Last(FirstN(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";").Result,1).Result).Result},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}),
+                        
+                        CountRows(Split(First(colSelectedMaintenanceLogSetting).ctc_overduealertemailaddress,";")) = 0,
+                        
+                        Table({Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""},
+                        {Email: ""}))
+                        
+                            
+                            
+                    Layout: =Layout.Vertical
+                    TemplatePadding: =0
+                    TemplateSize: =30
+                    Visible: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                    Width: =330
+                    X: |
+                        =986-270
+                    Y: =416
+                    ZIndex: =36
+
+                    Separator2_8 As rectangle:
+                        Fill: |-
+                            =ColorFade(
+                            varCTCLogoGreen, 70%)
+                        Height: =1
+                        OnSelect: =Select(Parent)
+                        Width: =Parent.TemplateWidth
+                        Y: =Parent.TemplateHeight - 1
+                        ZIndex: =4
+
+                    ReminderEmail_input_5 As text:
+                        BorderThickness: =0
+                        Default: =ThisItem.Email
+                        Fill: =RGBA(242,242,242,1)
+                        FocusedBorderThickness: =0
+                        Height: =20
+                        HoverFill: =varCTCLightGreen01
+                        OnSelect: =Select(Parent)
+                        PaddingLeft: =5
+                        Reset: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                        Size: =10
+                        Width: =330
+                        Y: =5
+                        ZIndex: =9
+
+                Button1_14 As button:
+                    BorderThickness: =0
+                    Fill: =varCTCLogoGreen
+                    FocusedBorderThickness: =0
+                    HoverFill: =varCTCDarkGrey
+                    OnSelect: |+
+                        =Patch(colSelectedMaintenanceLogSetting,
+                        LookUp(colSelectedMaintenanceLogSetting, ctc_name = GalleryFilter.Text)
+                        
+                        
+                        , {ctc_overduealertemailaddress: Concat(Filter(galOverdueReminderEmails_2.AllItems,!IsBlank(ReminderEmail_input_5.Text)),ReminderEmail_input_5.Text,";")})
+                        ;
+                        
+                        
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Size: =10
+                    Text: ="Update Overdue Alert Emails for Selected Log"
+                    Visible: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                    X: |
+                        =1081-270
+                    Y: =581
+                    ZIndex: =37
+
+                TextInput1_54 As text:
+                    BorderThickness: =0
+                    Color: =RGBA(255, 255, 255, 1)
+                    Default: ="Overdue Alert"
+                    DisplayMode: =DisplayMode.View
+                    Fill: =varCTCDarkGrey
+                    FontWeight: =FontWeight.Semibold
+                    Height: =20
+                    OnSelect: =
+                    PaddingLeft: =5
+                    Size: =9
+                    Visible: =LvarShowUpdateIndividualEmailsViewingIndividualLog
+                    Width: =330
+                    X: |
+                        =986-270
+                    Y: =396
+                    ZIndex: =38
+
+    GalleryFilter As label:
+        Height: =43
+        OnSelect: =
+        Text: =First(colSelectedMaintenanceLogSetting).ctc_name
+        Visible: =false
+        Width: =407
+        X: =128
+        Y: =23
+        ZIndex: =7
+
+    QuickSearch As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =7
+
+        SearchGallery_input As text:
+            BorderThickness: =0
+            Default: =
+            Fill: =RGBA(179,179,179,0.18)
+            FocusedBorderThickness: =0
+            Height: =20
+            HoverFill: =varCTCLightGreen01
+            PaddingLeft: =5
+            Size: =9
+            Visible: |-
+                =If(
+                Or(LvarViewIndividualLog, LvarShowUpdateIndividualEmails), false, true)
+            Width: =231
+            X: =1097
+            Y: =47
+            ZIndex: =4
+
+        TextInput1_17 As text:
+            Align: =Align.Center
+            BorderThickness: =0
+            Color: =RGBA(255, 255, 255, 1)
+            Default: |-
+                =With({varDefault:"Quick search by log name",varOOBTextId:"txtQuickSearchLogName"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+            DisplayMode: =DisplayMode.View
+            Fill: =varCTCDarkGrey
+            FontWeight: =FontWeight.Semibold
+            Height: =20
+            OnSelect: =
+            PaddingLeft: =5
+            Size: =9
+            Visible: |-
+                =If(
+                Or(LvarViewIndividualLog, LvarShowUpdateIndividualEmails), false, true)
+            Width: =231
+            X: =1096
+            Y: =23
+            ZIndex: =5
+
+        Image4 As image:
+            Height: =20
+            Image: =ImageClear
+            OnSelect: =Reset(SearchGallery_input)
+            PaddingBottom: =1
+            PaddingLeft: =1
+            PaddingRight: =3
+            PaddingTop: =1
+            Visible: |-
+                =If(Or(LvarViewIndividualLog <> true, !LvarShowUpdateIndividualEmails <> true) And
+                    
+                    Or(Trim(SearchGallery_input.Text) <> "", Trim(SearchGallery_input.Text) <> Blank()) And SearchGallery_input.Visible
+                
+                , true, false)
+                
+                //Or(LvarViewIndividualLog, LvarShowUpdateIndividualEmails)
+            Width: =20
+            X: =1308
+            Y: =47
+            ZIndex: =6
+
+    lblVersion_1 As label:
+        Height: =16
+        Size: =8
+        Text: =lblVersion.Text
+        Width: =208
+        X: =50
+        Y: =752
+        ZIndex: =8
+
+    Image3_1 As image:
+        Height: =46
+        Image: =Blank()
+        OnSelect: =Navigate(AdminScreen)
+        Width: =52
+        X: =34+0
+        Y: =15+0
+        ZIndex: =9
+

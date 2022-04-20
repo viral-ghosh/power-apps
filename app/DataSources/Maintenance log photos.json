@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "ctc_maintenancelogphotos",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "ctc_maintenancelogphoto",
+    "MaxGetRowsCount": 2000,
+    "Name": "Maintenance log photos",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "ctc_image": "Image",
+      "ctc_imageid": "ctc_ImageId",
+      "ctc_MaintenanceLog": "Maintenance Log",
+      "ctc_maintenancelogphoto_AsyncOperations": "System Jobs",
+      "ctc_maintenancelogphoto_BulkDeleteFailures": "Bulk Delete Failures",
+      "ctc_maintenancelogphoto_DuplicateBaseRecord": "Duplicate Records (ctc_maintenancelogphoto_DuplicateBaseRecord)",
+      "ctc_maintenancelogphoto_DuplicateMatchingRecord": "Duplicate Records (ctc_maintenancelogphoto_DuplicateMatchingRecord)",
+      "ctc_maintenancelogphoto_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "ctc_maintenancelogphoto_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "ctc_maintenancelogphoto_ProcessSession": "Process Sessions",
+      "ctc_maintenancelogphoto_SyncErrors": "Sync Errors",
+      "ctc_maintenancelogphotoid": "Maintenance log photo",
+      "ctc_name": "Name",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Maintenance log photos",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Maintenance log photos (Views)",
+    "Name": "_ctc_maintenancelogphoto_views",
+    "RelatedEntityName": "Maintenance log photos",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "1c82aa77-43d3-4709-ae52-dc7eacdc0d9e": "Active Maintenance log photos",
+      "1da7ea63-ba3b-42e4-b946-b1cf6e0a72d8": "Inactive Maintenance log photos",
+      "64244e32-5528-4d60-af33-9cacc47040ee": "Maintenance log photo Advanced Find View",
+      "85b78ea9-f47a-4a10-892b-44910f7cee0d": "Maintenance log photo Lookup View",
+      "f04d20cf-5d6f-48a7-8635-0f60e29e362f": "Maintenance log photo Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (Maintenance log photos)",
+    "Name": "ctc_maintenancelogphoto_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Maintenance log photos"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Maintenance log photos",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Maintenance log photos)",
+    "Name": "ctc_maintenancelogphoto_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Maintenance log photos"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Maintenance log photos",
+    "Type": "OptionSetInfo"
+  }
+]
