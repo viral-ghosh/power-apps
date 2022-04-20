@@ -147,6 +147,74 @@
     }
   },
   {
+    "DisplayName": "CategoryEnglish",
+    "Name": "ctc_categoryenglish",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Parking Lot Requirements",
+      "100000001": "Landscaping",
+      "100000002": "Sanitary Sewer and Storm Systems",
+      "100000003": "Garden Centre, Compounds and Exterior Storage",
+      "100000004": "Building Exterior",
+      "100000005": "Building Interior",
+      "100000006": "Mechanical",
+      "100000007": "Electrical",
+      "100000008": "Fire Prevention and Safety",
+      "100000009": "Fuel Storage and Waste Management",
+      "100000010": "Storage Tanks",
+      "100000011": "Other"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_categoryenglish",
+        "OptionSetReferenceEntityName": "Maintenance logs"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "ctc_categoryenglish",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_categoryenglish",
+    "RelatedEntityName": "Maintenance logs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "CategoryFrench",
+    "Name": "ctc_categoryfrench",
+    "OptionSetInfoNameMapping": {
+      "100000000": "Exigences relatives à l’aire de stationnement",
+      "100000001": "Aménagement paysager",
+      "100000002": "Égouts sanitaires et systèmes d’évacuation des eaux de pluie",
+      "100000003": "Centre du jardinage, lieux d’entreposage des déchets et entreposage ex",
+      "100000004": "Extérieur du bâtiment",
+      "100000005": "Intérieur du bâtiment",
+      "100000006": "Mécanique",
+      "100000007": "Électricité",
+      "100000008": "Prévention des incendies et sécurité",
+      "100000009": "Entreposage de carburant et gestion des déchets",
+      "100000010": "Réservoirs de stockage",
+      "100000011": "Autre"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "ctc_categoryfrench",
+        "OptionSetReferenceEntityName": "Maintenance logs"
+      },
+      "OptionSetReferenceItem1": {
+        "OptionSetReferenceColumnName": "ctc_categoryfrench",
+        "OptionSetReferenceEntityName": "MasterMaintenanceLogs"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "ctc_categoryfrench",
+    "RelatedEntityName": "Maintenance logs",
+    "Type": "OptionSetInfo"
+  },
+  {
     "DisplayName": "Active (Maintenance logs)",
     "Name": "ctc_ctc_maintenancelogs_active",
     "OptionSetInfoNameMapping": {
