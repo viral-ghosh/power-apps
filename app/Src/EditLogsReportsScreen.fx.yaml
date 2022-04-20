@@ -18,7 +18,7 @@ EditLogsReportsScreen As screen:
 
     Header_2 As Header:
         ScreenName: |-
-            =With({varDefault:"Edit Logs and Reports",varOOBTextId:"componentTextEditLogsReports"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+            =With({varDefault:"Edit Logs and Reports 2",varOOBTextId:"componentTextEditLogsReports"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
 
     MainMenu_leftnav_1 As LeftNavigation:
         NavItems: =colNav

@@ -1,6 +1,6 @@
 {
   "083b4c6a-b88f-43dc-b0be-07500ec83ac6": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_office365users/connections/bca6256c1f654678afb0f26276e66f87",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_office365users/connections/57a11274268646f1bf356278e52d036c",
     "connectionParameters": {
       "sku": "Enterprise"
     },
@@ -21,7 +21,7 @@
     "id": "083b4c6a-b88f-43dc-b0be-07500ec83ac6"
   },
   "18fb4166-8d13-41f8-9048-e22b24640240": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/0322a95346ff4a4dae8a1a22c301be9b",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/1a787d7cbf6b4c569ddebe381709dd93",
     "connectionParameters": {
       "sku": "Enterprise"
     },
@@ -43,7 +43,7 @@
     "id": "18fb4166-8d13-41f8-9048-e22b24640240"
   },
   "1da9e134-f522-4099-849a-d47fea48f8ec": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/0322a95346ff4a4dae8a1a22c301be9b",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/1a787d7cbf6b4c569ddebe381709dd93",
     "connectionParameters": {
       "sku": "Enterprise"
     },
@@ -74,7 +74,7 @@
     "id": "1da9e134-f522-4099-849a-d47fea48f8ec"
   },
   "232cdbc1-647b-4243-a581-7e0a0cc0e208": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/0322a95346ff4a4dae8a1a22c301be9b",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/1a787d7cbf6b4c569ddebe381709dd93",
     "connectionParameters": {
       "sku": "Enterprise"
     },
@@ -95,7 +95,7 @@
     "id": "232cdbc1-647b-4243-a581-7e0a0cc0e208"
   },
   "5094f6f3-b4e7-4132-b184-7c12a13bf820": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/0322a95346ff4a4dae8a1a22c301be9b",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_sharepointonline/connections/1a787d7cbf6b4c569ddebe381709dd93",
     "connectionParameters": {
       "sku": "Enterprise"
     },
@@ -170,9 +170,10 @@
     "id": "53d51a53-b44f-41dc-89ce-dee485713124"
   },
   "78f15ad2-74a7-4abf-a96e-2310bab9a397": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_commondataserviceforapps/connections/029c0b7966314a3db7cd8d282125b5a1",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_commondataserviceforapps/connections/c9c6082d4d964ec7bc94cfc91f239ee7",
     "connectionParameters": {
-      "sku": "Enterprise"
+      "sku": "Enterprise",
+      "token:grantType": "code"
     },
     "connectionRef": {
       "apiTier": "Premium",
@@ -294,7 +295,7 @@
     "id": "8de67b27-0449-4614-b6a4-ba237e1b9acd"
   },
   "93c1bcab-fe16-483d-8f00-4767cebd7ba8": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_wordonlinebusiness/connections/c322d56b6a28435db8243a19b8bd6749",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_wordonlinebusiness/connections/shared-wordonlinebus-4b5641f2-3904-4317-87b1-03cc-32dc7a0e",
     "connectionParameters": {
       "sku": "Enterprise"
     },
@@ -356,7 +357,7 @@
     "id": "95dfe099-4b43-4f16-a0eb-10cac2b0e782"
   },
   "b4a80527-8f95-468b-aba6-513481d34157": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_wordonlinebusiness/connections/c322d56b6a28435db8243a19b8bd6749",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_wordonlinebusiness/connections/shared-wordonlinebus-4b5641f2-3904-4317-87b1-03cc-32dc7a0e",
     "connectionParameters": {
       "sku": "Enterprise"
     },
@@ -431,7 +432,7 @@
     "id": "de61691f-448a-40c7-8858-5455d09e19c3"
   },
   "e9565dac-453e-4b19-8229-39446ee325dd": {
-    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_wordonlinebusiness/connections/c322d56b6a28435db8243a19b8bd6749",
+    "connectionInstanceId": "/providers/microsoft.powerapps/apis/shared_wordonlinebusiness/connections/shared-wordonlinebus-4b5641f2-3904-4317-87b1-03cc-32dc7a0e",
     "connectionParameters": {
       "sku": "Enterprise"
     },
