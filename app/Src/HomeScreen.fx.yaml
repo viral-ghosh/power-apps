@@ -2,7 +2,7 @@ HomeScreen As screen:
     Fill: =RGBA(179,179,179,0.18)
 
     Header_1 As Header:
-        ScreenName: ="Home Screen"
+        ScreenName: ="Home Screen1"
 
     MainMenu_leftnav As LeftNavigation:
         Width: =MainMenu_leftnav.MenuWidth

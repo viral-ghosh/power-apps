@@ -5,7 +5,7 @@ ScheduleManagerScreen As screen:
 
     Header_5 As Header:
         ScreenName: |-
-            =With({varDefault:"Schedule Manager",varOOBTextId:"componentTextScheduleManager"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
+            =With({varDefault:"Schedule Manager1",varOOBTextId:"componentTextScheduleManager"},With({varLocalizedText:LookUp(colLocalization,OOBTextID=varOOBTextId,LocalizedText)},Coalesce(varLocalizedText,varDefault)))
 
     MainMenu_leftnav_4 As LeftNavigation:
         NavItems: =colNav
